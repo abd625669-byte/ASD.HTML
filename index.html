@@ -3,22 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE LUXE RESTAURANT | المنيو الفاخر</title>
-    
-    <!-- استدعاء خطوط فاخرة ونحيفة تناسب الفنادق والمطاعم الراقية -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Cairo:wght@300;500;700&display=swap" rel="stylesheet">
+    <title>COFFEE ALCAPTAIN | المنيو الفاخر المستقل</title>
     
     <style>
         :root {
-            --bg-dark: #0D0D0D;           /* الأسود الفاحم للخلفية الأساسية */
-            --card-bg: #141414;          /* الرمادي الداكن جداً لكروت الطعام */
-            --gold-primary: #C5A880;     /* الذهبي المطفي الفخم للعناوين والأسعار */
-            --gold-glow: rgba(197, 168, 128, 0.25); /* توهج الوميض الذهبي */
-            --text-white: #E5E5E5;        /* الأبيض العاجي لأسماء الأطباق */
-            --text-muted: #8C8C8C;        /* الرمادي الخافت للوصف والتفاصيل */
-            --border-color: #1A1A1A;      /* لون الحدود الناعمة */
+            --bg-color: #F0E8D1;          /* البيج الكريمي الفخم للـ الخلفية الأساسية */
+            --card-bg: #FFFFFF;           /* الكروت بالأبيض العاجي النقي ليعطي اتساعاً وفخامة */
+            --primary-navy: #132A49;      /* الكحلي الداكن الملكي للعناوين والأسماء */
+            --text-gray: #7F7B82;         /* الرمادي المتوازن للأوصاف والتفاصيل */
+            --glow-color: rgba(19, 42, 73, 0.15); /* وميض نيلي ناعم وحريري جداً */
+            --border-elegant: rgba(19, 42, 73, 0.08); /* حدود رفيعة باهتة للفصل الفخم */
         }
 
         * {
@@ -33,57 +27,66 @@
         }
 
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-white);
-            font-family: "Cairo", sans-serif;
+            background-color: var(--bg-color);
+            /* خلفية ملكية منقوشة بخفة متناهية لا تشتت العين */
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 0 L60 30 L30 60 L0 30 Z' fill='none' stroke='%23132A49' stroke-width='0.5' stroke-opacity='0.025'/%3E%3C/svg%3E");
+            color: var(--primary-navy);
+            /* استخدام خطوط النظام الاحترافية المدمجة لضمان العمل بدون إنترنت وسيرفرات */
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             font-weight: 300;
             overflow-x: hidden;
-            padding-bottom: 60px;
+            padding-bottom: 80px;
         }
 
-        /* 🔤 تخصيص خط Marcellus العالمي الفخم للأسماء اللاتينية والعناوين الرئيسية */
-        h1, .brand-title, .splash-brand, .en-name, .item-price {
-            font-family: 'Marcellus', serif !important;
-            letter-spacing: 1px;
+        /* تنسيقات الخطوط للعناوين */
+        h1, h2, h3, 
+        .splash-brand, .brand-subtitle, 
+        .cat-btn {
+            font-weight: 700;
         }
 
-        /* ----- ✨ تأثير الوميض والتوهج الذهبي المنبثق بمجرد مرور الماوس أو الإصبع ----- */
+        .splash-title, .welcome-title, 
+        .en-name, .ar-name, .item-price, .item-description,
+        .btn-enter-menu, footer {
+            font-weight: 400;
+        }
+
+        /* ----- ✨ تأثير الوميض والنبض الحريري المطور عند اللمس الفوري ----- */
         .cat-btn, .item-card, .btn-enter-menu {
             position: relative;
-            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* التفاعل الفوري بمجرد اللمس أو مرور الماوس */
         .cat-btn:hover, .item-card:hover, .btn-enter-menu:hover,
         .cat-btn:active, .item-card:active, .btn-enter-menu:active {
-            transform: translateY(-3px);
-            border-color: var(--gold-primary) !important;
-            box-shadow: 0 0 25px 4px var(--gold-glow) !important;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px var(--glow-color) !important;
+            border-color: rgba(19, 42, 73, 0.3) !important;
             z-index: 5;
         }
 
-        /* نبضة ضوئية ناعمة تتوسع للخارج خلف العنصر */
+        /* نبضة ضوئية تتوسع وتختفي بمجرد ملامسة الإصبع */
         .cat-btn::after, .item-card::after, .btn-enter-menu::after {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
             border-radius: inherit;
-            box-shadow: 0 0 0 0 rgba(197, 168, 128, 0.4);
+            box-shadow: 0 0 0 0 rgba(19, 42, 73, 0.3);
             opacity: 0;
-            transition: all 0.5s ease;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             pointer-events: none;
         }
 
         .cat-btn:hover::after, .item-card:hover::after, .btn-enter-menu:hover::after {
-            box-shadow: 0 0 0 15px rgba(197, 168, 128, 0);
+            box-shadow: 0 0 0 15px rgba(19, 42, 73, 0);
             opacity: 1;
         }
 
-        /* ----- تصميم الشاشة الترحيبية الفاخرة ----- */
+        /* ----- الشاشة الترحيبية الفخمة ----- */
         .welcome-splash {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--bg-dark);
+            background: var(--bg-color);
             z-index: 9999;
             display: flex;
             flex-direction: column;
@@ -91,206 +94,213 @@
             align-items: center;
             text-align: center;
             padding: 20px;
-            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .welcome-splash.fade-out {
             opacity: 0;
             visibility: hidden;
-            transform: translateY(-100%);
+            transform: scale(1.02) translateY(-10px);
         }
 
-        .logo-inner {
-            font-size: 40px;
-            color: var(--gold-primary);
+        .logo-ring {
+            font-size: 45px;
             margin-bottom: 25px;
-            border: 1px solid var(--gold-primary);
-            width: 90px;
-            height: 90px;
+            border: 1px solid var(--primary-navy);
+            width: 95px;
+            height: 95px;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            box-shadow: 0 0 20px rgba(197, 168, 128, 0.1);
+            background: rgba(250, 250, 250, 0.5);
         }
 
         .splash-title {
-            font-size: 13px;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 10px;
+            font-size: 14px;
+            color: var(--text-gray);
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            font-weight: 400;
         }
 
         .splash-brand {
-            font-size: 32px;
-            color: var(--gold-primary);
-            font-weight: 400;
-            margin-bottom: 35px;
+            font-size: 34px;
+            color: var(--primary-navy);
+            margin-bottom: 40px;
+            letter-spacing: 1px;
         }
 
         .btn-enter-menu {
-            background: transparent;
-            color: var(--gold-primary);
-            border: 1px solid var(--gold-primary);
-            padding: 14px 50px;
-            font-size: 14px;
-            border-radius: 0; /* الزوايا الحادة تعطي انطباعاً أكثر فخامة ورسمية */
+            background: var(--primary-navy);
+            color: var(--bg-color);
+            border: none;
+            padding: 14px 55px;
+            font-size: 15px;
+            font-weight: 700;
+            border-radius: 4px; /* زوايا حادة كلاسيكية تعبر عن الفخامة والرسمية */
             cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            box-shadow: 0 10px 25px rgba(19, 42, 73, 0.15);
         }
 
         /* ----- رأس الصفحة (Header) ----- */
         header {
             text-align: center;
-            padding: 60px 20px 40px 20px;
-        }
-
-        .brand-title {
-            font-size: 36px;
-            color: var(--gold-primary);
-            font-weight: 400;
-            margin-bottom: 5px;
+            padding: 70px 20px 40px 20px;
         }
 
         .brand-subtitle {
-            font-size: 12px;
-            color: var(--text-muted);
-            letter-spacing: 4px;
+            font-size: 38px;
+            color: var(--primary-navy);
+            margin-bottom: 8px;
+            position: relative;
+            display: inline-block;
+            letter-spacing: 1px;
+        }
+
+        .welcome-title {
+            font-size: 13px;
+            color: var(--text-gray);
+            letter-spacing: 3px;
             text-transform: uppercase;
         }
 
-        /* ----- بار الأقسام المطور ----- */
+        /* ----- بار الأقسام التفاعلي الفاخر ----- */
         .categories-container {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 20px;
             padding: 20px;
             position: sticky;
             top: 0;
-            background: rgba(13, 13, 13, 0.85);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            background: rgba(240, 232, 209, 0.85); /* تأثير زجاجي شفاف مدمج مع الخلفية */
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             z-index: 10;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-elegant);
         }
 
         .cat-btn {
             background: transparent;
-            color: var(--text-muted);
-            border: 1px solid var(--border-color);
-            padding: 10px 28px;
-            font-size: 14px;
+            color: var(--text-gray);
+            border: none;
+            padding: 8px 10px;
+            font-size: 16px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: color 0.3s ease;
         }
 
         .cat-btn.active {
-            color: var(--gold-primary);
-            border-color: var(--gold-primary);
-            background: rgba(197, 168, 128, 0.03);
+            color: var(--primary-navy);
+            font-weight: 700;
+            border-bottom: 2px solid var(--primary-navy); /* مؤشر سفلي عائم وبسيط */
         }
 
-        /* ----- حاوية القائمة والكروت ----- */
+        /* ----- حاوية الكروت الفخمة المتباعدة ----- */
         .menu-container {
-            max-width: 750px;
-            margin: 30px auto;
-            padding: 0 20px;
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 0 24px;
         }
 
         .item-card {
             background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            padding: 25px;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .item-info {
-            flex: 1;
+            border: 1px solid var(--border-elegant);
+            border-radius: 4px; /* زوايا ناعمة جداً ورسمية */
+            padding: 30px; /* زيادة مساحات التنفس البصرية داخلياً */
+            margin-bottom: 24px; /* مسافة مريحة بين الكروت */
+            box-shadow: 0 4px 20px rgba(19, 42, 73, 0.02);
         }
 
         .item-main-line {
             display: flex;
             align-items: baseline;
             justify-content: space-between;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
         }
 
         .names-group {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
+            flex: 1;
         }
 
         .en-name {
-            font-size: 18px;
-            color: var(--text-white);
-            font-weight: 400;
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--primary-navy);
+            letter-spacing: 0.5px;
+        }
+
+        /* نقاط الربط الفاخرة بين الاسم والسعر كالفنادق الكبرى */
+        .dots-separator {
+            flex: 1;
+            border-bottom: 1px dotted rgba(19, 42, 73, 0.2);
+            margin: 0 15px;
+            align-self: center;
         }
 
         .ar-name {
-            font-size: 15px;
-            color: var(--text-muted);
-            font-weight: 500;
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--text-gray);
         }
 
         .item-price {
-            font-size: 18px;
-            color: var(--gold-primary);
-            font-weight: 400;
+            font-size: 17px;
+            color: var(--primary-navy);
+            font-weight: 700;
+            white-space: nowrap;
         }
 
-        /* إضافة وصف للمكونات لإعطاء الطابع الفخم للمطاعم العالمية */
+        /* إضافة وصف للمكونات بأسلوب راقٍ وجذاب */
         .item-description {
             font-size: 13px;
-            color: var(--text-muted);
-            line-height: 1.6;
-            font-weight: 300;
-            max-width: 85%;
+            color: var(--text-gray);
+            line-height: 1.7;
+            max-width: 90%;
+            font-weight: 400;
         }
 
         footer {
             text-align: center;
-            padding: 40px 20px;
-            margin-top: 5px;
+            padding: 60px 20px 40px 20px;
+            border-top: 1px solid var(--border-elegant);
+            max-width: 700px;
+            margin: 0 auto;
         }
 
         .footer-info {
             display: flex;
             justify-content: center;
-            gap: 30px;
-            font-size: 12px;
-            color: var(--text-muted);
-            letter-spacing: 1px;
+            gap: 40px;
+            font-size: 13px;
+            color: var(--text-gray);
         }
     </style>
 </head>
 <body>
 
-    <!-- الشاشة الترحيبية الفاخرة -->
+    <!-- الشاشة الترحيبية -->
     <div class="welcome-splash" id="welcomeSplash">
-        <div class="logo-inner">👑</div>
-        <h2 class="splash-title">Fine Dining Experience</h2>
-        <div class="splash-brand">THE LUXE RESTAURANT</div>
-        <button class="btn-enter-menu" onclick="dismissSplash()">Explore The Menu</button>
+        <div class="logo-ring">☕</div>
+        <h2 class="splash-title">أهلاً بكم في عالم المذاق الرفيع</h2>
+        <div class="splash-brand">COFFEE ALCAPTAIN</div>
+        <button class="btn-enter-menu" onclick="dismissSplash()">استكشاف المنيو</button>
     </div>
 
-    <!-- رأس الصفحة الفاخر -->
+    <!-- رأس الصفحة -->
     <header>
-        <h1 class="brand-title">THE LUXE</h1>
-        <p class="brand-subtitle">Signature Menu</p>
+        <div class="brand-subtitle">COFFEE ALCAPTAIN</div>
+        <h2 class="welcome-title">— قائمة المأكولات والمشروبات الفاخرة —</h2>
     </header>
 
-    <!-- الأقسام الفاخرة -->
+    <!-- بار الأقسام المطور -->
     <div class="categories-container">
-        <button class="cat-btn active" onclick="switchCategory('starters', event)">المقبلات الفاخرة</button>
-        <button class="cat-btn" onclick="switchCategory('mains', event)">الأطباق الرئيسية</button>
-        <button class="cat-btn" onclick="switchCategory('desserts', event)">الحلويات والمشروبات</button>
+        <button class="cat-btn active" onclick="switchCategory('shisha', event)">الأراغيل الملكية</button>
+        <button class="cat-btn" onclick="switchCategory('cold', event)">المشروبات الباردة</button>
+        <button class="cat-btn" onclick="switchCategory('hot', event)">المشروبات الساخنة</button>
     </div>
 
     <!-- حاوية عرض الأطباق -->
@@ -298,37 +308,30 @@
 
     <footer>
         <div class="footer-info">
-            <div>📍 المنطقة العالمية الفاخرة</div>
+            <div>📍 العاصمة الكرادة داخل</div>
             <div style="direction: ltr;">📞 +964 770 000 0000</div>
         </div>
     </footer>
 
     <script>
-        // إخفاء الشاشة الترحيبية بسلاسة
         function dismissSplash() {
             const splash = document.getElementById('welcomeSplash');
             splash.classList.add('fade-out');
             setTimeout(() => { splash.style.display = 'none'; }, 800);
         }
 
-        // بيانات المنيو المحلية (بدون سيرفر نهائياً لسهولة العرض والتعديل السريع)
+        // مصفوفة البيانات المحلية المستقلة تماماً
         const localMenuData = [
-            // قسم المقبلات
-            { id: "1", en: "Wagyu Carpaccio", ar: "كارباتشيو واغيو", price: "24,000", desc: "شرائح لحم الواغيو الياباني الرفيعة مع زيت الكمأة الأسود، وجبن البارميزان المعتق ورذاذ الليمون السقلي.", cat: "starters" },
-            { id: "2", en: "Truffle Burrata", ar: "بوراتا الكمأة", price: "18,500", desc: "جبن البوراتا الإيطالي الطازج يقدم على فِراش من الطماطم الكرزية البرية، معجون الترافل النقي، والريحان العضوي.", cat: "starters" },
-            
-            // قسم الأطباق الرئيسية
-            { id: "3", en: "Black Cod Glaze", ar: "البلاك كود الفاخر", price: "45,000", desc: "سمك القد الأسود المطهو ببطء والمتبل بصلصة الميسو الحلوة، يقدم مع هريس الهليون البري المقرمش.", cat: "mains" },
-            { id: "4", en: "Ribeye Steak", ar: "ستيك ريب آي معتق", price: "52,000", desc: "قطعة ستيك ريب آي ممتازة معتقة لـ 28 يوماً، مشوية على الفحم، تقدم مع صوص الفطر البري وزبدة الأعشاب.", cat: "mains" },
-            
-            // قسم الحلويات والمشروبات
-            { id: "5", en: "Golden Saffron Fondant", ar: "فوندان الزعفران الذهبي", price: "15,000", desc: "كيك الفوندان الساخن والمحشو بقلب سائل من كاسترد الزعفران الملكي، يقدم مع آيس كريم الفانيليا النادرة.", cat: "desserts" },
-            { id: "6", en: "Royal Espresso Martini", ar: "إسبريسو مارتيني الملكي", price: "9,000", desc: "مزيج فاخر من قهوة الإسبريسو المستخلصة طازجاً مع نكهات الكراميل المملح المقطر ورغوة ذهبية كثيفة.", cat: "desserts" }
+            { id: "1", en: "Double Apple", ar: "تفاحتين نخلة", price: "7,000", desc: "النكهة الكلاسيكية العريقة والمعتقة بامتياز، تقدم بجودة ملكية مخصصة لأصحاب الذوق الرفيع.", cat: "shisha" },
+            { id: "2", en: "Gum & Mint", ar: "علكة ونعناع هادئ", price: "6,000", desc: "مزيج منعش من أوراق النعناع البري البارد مع نكهة العلكة الساحرة لتجربة استرخاء مثالية.", cat: "shisha" },
+            { id: "3", en: "Lemon Mint Juice", ar: "عصير ليمون ونعناع", price: "4,500", desc: "شرائح الليمون الأصفر الطازج المعصور بدقة مع أوراق النعناع الأخضر المستخلص فوراً.", cat: "cold" },
+            { id: "4", en: "Signature Iced Latte", ar: "آيس لاتيه كابتن", price: "5,000", desc: "جرعة مزدوجة من قهوة الإسبريسو الفاخرة الممزوجة مع الحليب البارد وقطع الثلج النقية.", cat: "cold" },
+            { id: "5", en: "Premium Turkish Coffee", ar: "قهوة تركية بالهيل", price: "3,000", desc: "حبوب البن المحمصة والمطحونة بعناية فائقة على الطريقة التقليدية لضمان رغوة غنية ونكهة عميقة.", cat: "hot" },
+            { id: "6", en: "Traditional Cardamom Tea", ar: "شاي مخدر بالهيل العضوي", price: "1,500", desc: "أوراق الشاي السيلاني الفاخر المطهو ببطء على الفحم مع حبات الهيل الهندي العطرة.", cat: "hot" }
         ];
 
-        let currentCategory = 'starters';
+        let currentCategory = 'shisha';
 
-        // عرض المنتجات بناءً على القسم المحدد
         function renderMenu() {
             const wrapper = document.getElementById('menu-items-wrapper');
             wrapper.innerHTML = '';
@@ -343,6 +346,7 @@
                         <div class="item-main-line">
                             <div class="names-group">
                                 <span class="en-name">${item.en}</span>
+                                <span class="dots-separator"></span>
                                 <span class="ar-name">${item.ar}</span>
                             </div>
                             <span class="item-price">${item.price} د.ع</span>
@@ -354,7 +358,6 @@
             });
         }
 
-        // تبديل الأقسام
         function switchCategory(cat, event) {
             currentCategory = cat;
             document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
@@ -362,7 +365,6 @@
             renderMenu();
         }
 
-        // تشغيل القائمة تلقائياً عند تحميل الصفحة
         document.addEventListener("DOMContentLoaded", () => {
             renderMenu();
         });
