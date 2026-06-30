@@ -450,38 +450,6 @@
             setTimeout(() => { splash.style.display = 'none'; }, 600);
         }
 
-        document.addEventListener("DOMContentLoaded", () => {
-            loadSavedLogo();
-        });
-
-        function loadSavedLogo() {
-            const savedLogo = localStorage.getItem("captain_custom_logo");
-            if (savedLogo) {
-                document.getElementById("splashLogoContainer").innerHTML = `<img src="${savedLogo}" alt="COFFEE ALCAPTAIN">`;
-                document.getElementById("headerLogoContainer").innerHTML = `<img src="${savedLogo}" alt="COFFEE ALCAPTAIN">`;
-            }
-        }
-
-        function handleLogoUpload(input) {
-            const file = input.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const base64Data = e.target.result;
-                    try {
-                        localStorage.setItem("captain_custom_logo", base64Data);
-                        loadSavedLogo();
-                        const status = document.getElementById("uploadStatus");
-                        status.style.display = "block";
-                        setTimeout(() => { status.style.display = "none"; }, 3000);
-                    } catch (error) {
-                        alert("حجم الصورة كبير جداً يا كابتن! يرجى اختيار صورة أصغر حجماً لتفادي امتلاء ذاكرة المتصفح.");
-                    }
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
         // إعدادات اتصال قاعدة بيانات Firebase المستهدفة
         const firebaseConfig = {
             databaseURL: "https://cofe1-6d9c5-default-rtdb.firebaseio.com/"
@@ -494,6 +462,18 @@
         let currentCategory = 'shisha';
         let isCaptainMode = false;
         let editTargetId = null;
+
+        // الاستماع إلى اللوجو من السيرفر وتحديثه لجميع الأجهزة والزبائن فوراً
+        firebase.database().ref("custom_logo").on('value', (snapshot) => {
+            const savedLogo = snapshot.val();
+            if (savedLogo) {
+                document.getElementById("splashLogoContainer").innerHTML = `<img src="${savedLogo}" alt="COFFEE ALCAPTAIN">`;
+                document.getElementById("headerLogoContainer").innerHTML = `<img src="${savedLogo}" alt="COFFEE ALCAPTAIN">`;
+            } else {
+                document.getElementById("splashLogoContainer").innerHTML = `<div class="logo-placeholder">☕</div>`;
+                document.getElementById("headerLogoContainer").innerHTML = `<div class="logo-placeholder" style="font-size:35px;">☕</div>`;
+            }
+        });
 
         db.on('value', (snapshot) => {
             const data = snapshot.val();
@@ -619,6 +599,59 @@
             document.getElementById('prodEnName').value = '';
             document.getElementById('prodArName').value = '';
             document.getElementById('prodPrice').value = '';
+        }
+
+        // الدالة الذكية لضغط اللوجو ورفعه للسيرفر السحابي ليعمل عند جميع المستخدمين
+        function handleLogoUpload(input) {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+                        
+                        // تحديد أبعاد مناسبة للوجو (250 بكسل كحد أقصى) لضمان سرعة تحميل الموقع لدى الزبائن
+                        const MAX_WIDTH = 250;
+                        const MAX_HEIGHT = 250;
+                        let width = img.width;
+                        let height = img.height;
+
+                        if (width > height) {
+                            if (width > MAX_WIDTH) {
+                                height *= MAX_WIDTH / width;
+                                width = MAX_WIDTH;
+                            }
+                        } else {
+                            if (height > MAX_HEIGHT) {
+                                width *= MAX_HEIGHT / height;
+                                height = MAX_HEIGHT;
+                            }
+                        }
+
+                        canvas.width = width;
+                        canvas.height = height;
+                        ctx.drawImage(img, 0, 0, width, height);
+
+                        // تحويل الصورة لصيغة JPEG مضغوطة وخفيفة جداً
+                        const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
+
+                        // حفظ الصورة مباشرة في قاعدة بيانات Firebase السحابية
+                        firebase.database().ref("custom_logo").set(compressedBase64)
+                        .then(() => {
+                            const status = document.getElementById("uploadStatus");
+                            status.style.display = "block";
+                            setTimeout(() => { status.style.display = "none"; }, 3000);
+                        })
+                        .catch((error) => {
+                            alert("حدث خطأ أثناء حفظ اللوجو في السيرفر.");
+                        });
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
         }
     </script>
 </body>
