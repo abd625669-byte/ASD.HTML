@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>COFFEE ALCAPTAIN | المنيو الذكي</title>
     
-    <!-- الخطوط الأصلية المستدعاة من السيرفر -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400..700&family=Noto+Sans+Arabic:wght@300;400;700&display=swap" rel="stylesheet">
@@ -64,67 +63,52 @@
             z-index: 5;
         }
 
-        /* ----- 🖼️ تعديل وتنسيق حاويات اللوجو لمنع الاختفاء ----- */
+        /* ----- 🖼️ حاويات اللوجو الفخمة (الحل الجذري) ----- */
         .logo-container {
-            width: 110px;
-            height: 110px;
+            width: 140px;
+            height: 140px;
             margin-bottom: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             border: 2px solid var(--primary-navy);
             border-radius: 50%;
-            background: #FFFFFF;
-            padding: 4px;
-            box-shadow: 0 8px 20px rgba(19, 42, 73, 0.1);
+            background: #000000; /* خلفية سوداء لتبزر تفاصيل اللوجو الفخم */
+            padding: 8px;
+            box-shadow: 0 8px 24px rgba(19, 42, 73, 0.2);
             overflow: hidden;
         }
 
         .logo-container img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             border-radius: 50%;
             display: block;
         }
 
         /* لوجو الهيدر الصغير */
         .header-logo {
-            width: 80px;
-            height: 80px;
+            width: 90px;
+            height: 90px;
             margin: 0 auto 15px auto;
             border: 1px solid var(--primary-navy);
             border-radius: 50%;
-            background: #FFFFFF;
-            padding: 4px;
+            background: #000000; /* خلفية سوداء متناسقة */
+            padding: 6px;
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 10px rgba(19, 42, 73, 0.05);
+            box-shadow: 0 4px 12px rgba(19, 42, 73, 0.15);
         }
 
         .header-logo img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             border-radius: 50%;
             display: block;
-        }
-
-        /* بديل اللوجو النصي الفخم في حال تعذر التحميل */
-        .logo-fallback {
-            width: 100%;
-            height: 100%;
-            background: var(--primary-navy);
-            color: var(--bg-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            font-weight: bold;
-            border-radius: 50%;
-            font-family: "El Messiri", sans-serif !important;
         }
 
         /* ----- الشاشة الترحيبية ----- */
@@ -302,39 +286,34 @@
         }
     </style>
 
-    <!-- 🌐 استدعاء حزم Firebase الأساسية من السيرفر -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 </head>
 <body>
 
-    <!-- الشاشة الترحيبية المضاف إليها اللوجو المباشر -->
     <div class="welcome-splash" id="welcomeSplash">
         <div class="logo-container">
-            <img src="https://i.ibb.co/6wX6mJ8m/logo.png" alt="COFFEE ALCAPTAIN LOGO" onerror="handleLogoError(this)">
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 720 960'><rect width='720' height='960' fill='black'/><path d='M360 144c11.5 0 21 9.5 21 21v24c29.5 5 57 16.5 81 33.5l17-17c8-8 21.5-8 29.5 0s8 21.5 0 29.5l-17 17c17 24 28.5 51.5 33.5 81h24c11.5 0 21 9.5 21 21s-9.5 21-21 21h-24c-5 29.5-16.5 57-33.5 81l17 17c8 8 8 21.5 0 29.5s-21.5 8-29.5 0l-17-17c-24 17-51.5 28.5-81 33.5v24c0 11.5-9.5 21-21 21s-21-9.5-21-21v-24c-29.5-5-57-16.5-81-33.5l-17 17c-8 8-21.5 8-29.5 0s-8-21.5 0-29.5l17-17c-17-24-28.5-51.5-33.5-81h-24c-11.5 0-21-9.5-21-21s9.5-21 21-21h24c5-29.5 16.5-57 33.5-81l-17-17c-8-8-8-21.5 0-29.5s21.5-8 29.5 0l17 17c24-17 51.5-28.5 81-33.5v-24c0-11.5 9.5-21 21-21zm0 56c-84 0-152 68-152 152s68 152 152 152 152-68 152-152-68-152-152-152zm-35 83c2.5-3.5 6.5-5.5 11-5.5s8.5 2 11 5.5l13 18.5c5.5-2.5 11.5-4 18-4 23 0 42 19 42 42s-19 42-42 42c-6.5 0-12.5-1.5-18-4l-13 18.5c-2.5 3.5-6.5 5.5-11 5.5s-8.5-2-11-5.5l-13-18.5c-5.5 2.5-11.5 4-18 4-23 0-42-19-42-42s19-42 42-42c6.5 0 12.5 1.5 18 4l13-18.5zm35 159c43.5 0 79-35.5 79-79s-35.5-79-79-79-79 35.5-79 79 35.5 79 79 79zm-75-79c0 14 7.5 26 18.5 33l-10 14c-17-11-28.5-30-28.5-52 0-35 28.5-63 63-63 22 0 41 11.5 52 28.5l-14 10c-7-11-19-18.5-33-18.5-24 0-46 22-46 48zm121 33c11-7 18.5-19 18.5-33 0-26-22-48-46-48-14 0-26 7.5-33 18.5l-14-10c11-17 30-28.5 52-28.5 35 0 63 28.5 63 63 0 22-11.5 41-28.5 52l-10-14zM360 550c82.5 0 150 67.5 150 150v5c0 8.5-6.5 15-15 15H225c-8.5 0-15-6.5-15-15v-5c0-82.5 67.5-150 150-150zm120 140c-11.5-44.5-47.5-78.5-92.5-86v13.5c0 15-12.5 27.5-27.5 27.5S332.5 632.5 332.5 617.5v-13.5c-45 7.5-81 41.5-92.5 86H480zm-147.5-72.5c0 4 3.5 7.5 7.5 7.5s7.5-3.5 7.5-7.5V600h-15v47.5zm19 25c6-4 13.5-6.5 21-6.5s15 2.5 21 6.5l8.5-12.5c-8.5-6-18.5-9-29.5-9s-21 3-29.5 9l10 13zM280 630c0-11 9-20 20-20s20 9 20 20-9 20-20 20-20-9-20-20zm400 130H40v40h640v-40zM224 850c0-21.5 12-39 31.5-48.5l9 18c-12 5.5-19 15-19 30.5s7 25 19 30.5l-9 18c-19.5-9.5-31.5-27-31.5-48.5zm70-46h21l22 92h-21l-5-24h-34l-5 24h-21l22-92zm-12 50h24l-12-54-12 54zm102-50c18.5 0 31.5 11 31.5 28.5S402.5 861 384 861h-17v31h-21v-92h38zm-17 38h16c8 0 12.5-4 12.5-10s-4.5-10-12.5-10h-16v20zm125-38v18h-28v19h25v17h-25v20h28v18h-49v-92h49zm46 0c14.5 0 25.5 4.5 31.5 13.5l-15 12c-4-5.5-9.5-8.5-16.5-8.5-11 0-18.5 8.5-18.5 21s7.5 21 18.5 21c7 0 12.5-3 16.5-8.5l15 12c-6 9-17 13.5-31.5 13.5-24.5 0-39.5-17.5-39.5-43s15-43 39.5-43zm62 18v74h-21v-74h-23v-18h67v18h-23zm52-18h21l22 92h-21l-5-24h-34l-5 24h-21l22-92zm-12 50h24l-12-54-12 54zm54-50v92h-21v-92h21zm75 0v92h-19l-34-51v51h-20v-92h19l34 50v-50h20z'/></svg>" alt="COFFEE ALCAPTAIN LOGO">
         </div>
         <h2 class="splash-title">أهلاً بكم في عالم المذاق الرفيع</h2>
         <div class="splash-brand">COFFEE ALCAPTAIN</div>
         <button class="btn-enter-menu" onclick="dismissSplash()">استكشاف المنيو</button>
     </div>
 
-    <!-- رأس الصفحة المضاف إليه اللوجو المباشر -->
     <header>
         <div class="header-logo">
-            <img src="https://i.ibb.co/6wX6mJ8m/logo.png" alt="COFFEE ALCAPTAIN LOGO" onerror="handleLogoError(this)">
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 720 960'><rect width='720' height='960' fill='black'/><path d='M360 144c11.5 0 21 9.5 21 21v24c29.5 5 57 16.5 81 33.5l17-17c8-8 21.5-8 29.5 0s8 21.5 0 29.5l-17 17c17 24 28.5 51.5 33.5 81h24c11.5 0 21 9.5 21 21s-9.5 21-21 21h-24c-5 29.5-16.5 57-33.5 81l17 17c8 8 8 21.5 0 29.5s-21.5 8-29.5 0l-17-17c-24 17-51.5 28.5-81 33.5v24c0 11.5-9.5 21-21 21s-21-9.5-21-21v-24c-29.5-5-57-16.5-81-33.5l-17 17c-8 8-21.5 8-29.5 0s-8-21.5 0-29.5l17-17c-17-24-28.5-51.5-33.5-81h-24c-11.5 0-21-9.5-21-21s9.5-21 21-21h24c5-29.5 16.5-57 33.5-81l-17-17c-8-8-8-21.5 0-29.5s21.5-8 29.5 0l17 17c24-17 51.5-28.5 81-33.5v-24c0-11.5 9.5-21 21-21zm0 56c-84 0-152 68-152 152s68 152 152 152 152-68 152-152-68-152-152-152zm-35 83c2.5-3.5 6.5-5.5 11-5.5s8.5 2 11 5.5l13 18.5c5.5-2.5 11.5-4 18-4 23 0 42 19 42 42s-19 42-42 42c-6.5 0-12.5-1.5-18-4l-13 18.5c-2.5 3.5-6.5 5.5-11 5.5s-8.5-2-11-5.5l-13-18.5c-5.5 2.5-11.5 4-18 4-23 0-42-19-42-42s19-42 42-42c6.5 0 12.5 1.5 18 4l13-18.5zm35 159c43.5 0 79-35.5 79-79s-35.5-79-79-79-79 35.5-79 79 35.5 79 79 79zm-75-79c0 14 7.5 26 18.5 33l-10 14c-17-11-28.5-30-28.5-52 0-35 28.5-63 63-63 22 0 41 11.5 52 28.5l-14 10c-7-11-19-18.5-33-18.5-24 0-46 22-46 48zm121 33c11-7 18.5-19 18.5-33 0-26-22-48-46-48-14 0-26 7.5-33 18.5l-14-10c11-17 30-28.5 52-28.5 35 0 63 28.5 63 63 0 22-11.5 41-28.5 52l-10-14zM360 550c82.5 0 150 67.5 150 150v5c0 8.5-6.5 15-15 15H225c-8.5 0-15-6.5-15-15v-5c0-82.5 67.5-150 150-150zm120 140c-11.5-44.5-47.5-78.5-92.5-86v13.5c0 15-12.5 27.5-27.5 27.5S332.5 632.5 332.5 617.5v-13.5c-45 7.5-81 41.5-92.5 86H480zm-147.5-72.5c0 4 3.5 7.5 7.5 7.5s7.5-3.5 7.5-7.5V600h-15v47.5zm19 25c6-4 13.5-6.5 21-6.5s15 2.5 21 6.5l8.5-12.5c-8.5-6-18.5-9-29.5-9s-21 3-29.5 9l10 13zM280 630c0-11 9-20 20-20s20 9 20 20-9 20-20 20-20-9-20-20zm400 130H40v40h640v-40zM224 850c0-21.5 12-39 31.5-48.5l9 18c-12 5.5-19 15-19 30.5s7 25 19 30.5l-9 18c-19.5-9.5-31.5-27-31.5-48.5zm70-46h21l22 92h-21l-5-24h-34l-5 24h-21l22-92zm-12 50h24l-12-54-12 54zm102-50c18.5 0 31.5 11 31.5 28.5S402.5 861 384 861h-17v31h-21v-92h38zm-17 38h16c8 0 12.5-4 12.5-10s-4.5-10-12.5-10h-16v20zm125-38v18h-28v19h25v17h-25v20h28v18h-49v-92h49zm46 0c14.5 0 25.5 4.5 31.5 13.5l-15 12c-4-5.5-9.5-8.5-16.5-8.5-11 0-18.5 8.5-18.5 21s7.5 21 18.5 21c7 0 12.5-3 16.5-8.5l15 12c-6 9-17 13.5-31.5 13.5-24.5 0-39.5-17.5-39.5-43s15-43 39.5-43zm62 18v74h-21v-74h-23v-18h67v18h-23zm52-18h21l22 92h-21l-5-24h-34l-5 24h-21l22-92zm-12 50h24l-12-54-12 54zm102-50c18.5 0 31.5 11 31.5 28.5S402.5 861 384 861h-17v31h-21v-92h38zm-17 38h16c8 0 12.5-4 12.5-10s-4.5-10-12.5-10h-16v20zm125-38v18h-28v19h25v17h-25v20h28v18h-49v-92h49zm46 0c14.5 0 25.5 4.5 31.5 13.5l-15 12c-4-5.5-9.5-8.5-16.5-8.5-11 0-18.5 8.5-18.5 21s7.5 21 18.5 21c7 0 12.5-3 16.5-8.5l15 12c-6 9-17 13.5-31.5 13.5-24.5 0-39.5-17.5-39.5-43s15-43 39.5-43zm62 18v74h-21v-74h-23v-18h67v18h-23zm52-18h21l22 92h-21l-5-24h-34l-5 24h-21l22-92zm-12 50h24l-12-54-12 54zm54-50v92h-21v-92h21zm75 0v92h-19l-34-51v51h-20v-92h19l34 50v-50h20z'/></svg>" alt="COFFEE ALCAPTAIN LOGO">
         </div>
         <div class="brand-subtitle">COFFEE ALCAPTAIN</div>
         <h2 class="welcome-title">— قائمة المأكولات والمشروبات الفاخرة —</h2>
     </header>
 
-    <!-- بار الأقسام -->
     <div class="categories-container">
         <button class="cat-btn active" onclick="switchCategory('shisha', event)">الأراغيل الملكية</button>
         <button class="cat-btn" onclick="switchCategory('cold', event)">المشروبات الباردة</button>
         <button class="cat-btn" onclick="switchCategory('hot', event)">المشروبات الساخنة</button>
     </div>
 
-    <!-- حاوية عرض الأطباق الديناميكية من السيرفر -->
     <div class="menu-container" id="menu-items-wrapper"></div>
 
     <footer>
@@ -345,14 +324,8 @@
     </footer>
 
     <script>
-        // إعداد ذكي للتعامل مع أي مشكلة في تحميل الصورة من خادم الرفع
-        function handleLogoError(imageElement) {
-            const parent = imageElement.parentElement;
-            parent.innerHTML = '<div class="logo-fallback">CA</div>';
-        }
-
         // إعدادات اتصال سيرفر الـ Firebase الخاصة بك
-        // ⚠️ تأكد من ملء هذه البيانات ليرتبط المنيو بقاعدة بياناتك
+        // ⚠️ تأكد من وضع بيانات مشروعك هنا ليرتبط بقاعدة بياناتك الحيّة
         const firebaseConfig = {
             apiKey: "YOUR_API_KEY",
             authDomain: "YOUR_AUTH_DOMAIN",
