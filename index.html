@@ -3,20 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COFFEE ALCAPTAIN | المنيو الذكي</title>
+    <title>COFFEE ALCAPTAIN | منيو الكابتن</title>
     
+    <!-- استدعاء الخطوط المطلوبة بشكل صحيح (El Messiri + Noto Sans Arabic) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400..700&family=Noto+Sans+Arabic:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@600;700&family=Noto+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
     
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
     <style>
         :root {
             --bg-color: #F0E8D1;          /* البيج الكريمي الفخم للـ الخلفية الأساسية */
-            --card-bg: #FFFFFF;           /* الأبيض العاجي للكروت */
-            --primary-navy: #132A49;      /* الكحلي الداكن الملكي */
-            --text-gray: #7F7B82;         /* الرمادي المتوازن للتفاصيل */
-            --glow-color: rgba(19, 42, 73, 0.15); /* وميض ناعم حريري */
-            --border-elegant: rgba(19, 42, 73, 0.08); /* حدود رفعت باهتة */
+            --card-bg: #FFFFFF;           /* الأبيض العاجي لكروت المنتجات */
+            --primary-navy: #132A49;      /* الكحلي الداكن الفخم للعناوين والأسماء */
+            --text-gray: #7F7B82;         /* الرمادي المتوازن للأوصاف والأسعار والتفاصيل */
+            --white: #FFFFFF;             
+            --glow-color: rgba(19, 42, 73, 0.35); /* لون التوهج النيلي */
         }
 
         * {
@@ -32,86 +36,41 @@
 
         body {
             background-color: var(--bg-color);
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 0 L60 30 L30 60 L0 30 Z' fill='none' stroke='%23132A49' stroke-width='0.5' stroke-opacity='0.025'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 0 L60 30 L30 60 L0 30 Z' fill='none' stroke='%23132A49' stroke-width='0.5' stroke-opacity='0.03'/%3E%3C/svg%3E");
             color: var(--primary-navy);
             font-family: "Noto Sans Arabic", sans-serif;
-            font-weight: 300;
             overflow-x: hidden;
-            padding-bottom: 80px;
+            padding-bottom: 140px;
         }
 
-        h1, h2, h3, .splash-brand, .brand-subtitle, .cat-btn {
+        /* 👑 تطبيق خط El Messiri حصراً على العناوين، الرسائل الترحيبية، وأزرار الأقسام */
+        h1, h2, h3, 
+        .splash-brand, .splash-title, 
+        .brand-subtitle, .welcome-title, 
+        .cat-btn, .panel-section-title {
             font-family: "El Messiri", sans-serif !important;
             font-weight: 700;
         }
 
-        .splash-title, .welcome-title, .en-name, .ar-name, .item-price, .item-description, .btn-enter-menu, footer {
+        /* 📋 تطبيق خط Noto Sans Arabic على أسماء الطعام، الأسعار، التفاصيل، واللوحات */
+        .en-name, .ar-name, .item-price, .footer-info, 
+        .btn-enter-menu, .btn-add-item, .toggle-captain-btn,
+        .btn-edit, .btn-delete, input, select, button, .price-badge {
             font-family: "Noto Sans Arabic", sans-serif !important;
         }
 
-        /* ----- تأثيرات التفاعل والوميض ----- */
-        .cat-btn, .item-card, .btn-enter-menu {
-            position: relative;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        /* ----- ✨ تأثير التفاعل المميز (التوهج الناعم والارتفاع) ----- */
+        .cat-btn, .item-card, .btn-enter-menu, .btn-add-item, .toggle-captain-btn {
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .cat-btn:hover, .item-card:hover, .btn-enter-menu:hover,
-        .cat-btn:active, .item-card:active, .btn-enter-menu:active {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 30px var(--glow-color) !important;
-            border-color: rgba(19, 42, 73, 0.3) !important;
-            z-index: 5;
+        .cat-btn:hover, .item-card:hover, .btn-enter-menu:hover, .btn-add-item:hover, .toggle-captain-btn:hover,
+        .cat-btn:active, .item-card:active, .btn-enter-menu:active, .btn-add-item:active, .toggle-captain-btn:active {
+            transform: scale(1.02);
+            box-shadow: 0 10px 25px var(--glow-color) !important;
         }
 
-        /* ----- 🖼️ حاويات اللوجو الفخمة (الحل الجذري) ----- */
-        .logo-container {
-            width: 140px;
-            height: 140px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid var(--primary-navy);
-            border-radius: 50%;
-            background: #000000; /* خلفية سوداء لتبزر تفاصيل اللوجو الفخم */
-            padding: 8px;
-            box-shadow: 0 8px 24px rgba(19, 42, 73, 0.2);
-            overflow: hidden;
-        }
-
-        .logo-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            border-radius: 50%;
-            display: block;
-        }
-
-        /* لوجو الهيدر الصغير */
-        .header-logo {
-            width: 90px;
-            height: 90px;
-            margin: 0 auto 15px auto;
-            border: 1px solid var(--primary-navy);
-            border-radius: 50%;
-            background: #000000; /* خلفية سوداء متناسقة */
-            padding: 6px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 12px rgba(19, 42, 73, 0.15);
-        }
-
-        .header-logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            border-radius: 50%;
-            display: block;
-        }
-
-        /* ----- الشاشة الترحيبية ----- */
+        /* ----- تصميم الشاشة الترحيبية ----- */
         .welcome-splash {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -123,268 +82,465 @@
             align-items: center;
             text-align: center;
             padding: 20px;
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.6s ease-in-out;
         }
 
         .welcome-splash.fade-out {
             opacity: 0;
             visibility: hidden;
-            transform: scale(1.02) translateY(-10px);
+            transform: translateY(-100%);
         }
 
+        .logo-wrapper {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--white);
+            border-radius: 24px; /* زوايا دائرية حديثة بدلاً من الدائرة الكاملة */
+            overflow: hidden;
+            border: 3px solid var(--primary-navy);
+            box-shadow: 0 8px 20px rgba(19, 42, 73, 0.15);
+        }
+
+        .logo-wrapper img {
+            width: 100%; height: 100%; object-fit: contain; 
+        }
+
+        .logo-placeholder { font-size: 55px; }
+
         .splash-title {
-            font-size: 14px;
+            font-size: 18px;
             color: var(--text-gray);
-            letter-spacing: 2px;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
 
         .splash-brand {
-            font-size: 34px;
+            font-size: 38px;
             color: var(--primary-navy);
-            margin-bottom: 40px;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
         }
 
         .btn-enter-menu {
             background: var(--primary-navy);
             color: var(--bg-color);
             border: none;
-            padding: 14px 55px;
-            font-size: 15px;
+            padding: 14px 50px;
+            font-size: 16px;
             font-weight: 700;
-            border-radius: 4px;
+            border-radius: 12px;
             cursor: pointer;
-            box-shadow: 0 10px 25px rgba(19, 42, 73, 0.15);
+            box-shadow: 0 6px 15px rgba(19, 42, 73, 0.2);
         }
 
-        /* ----- Header ----- */
+        /* ----- الهيدر الجديد (تنسيق ممتد وأنيق) ----- */
         header {
             text-align: center;
-            padding: 50px 20px 30px 20px;
+            padding: 40px 20px;
+            background: transparent;
         }
 
-        .brand-subtitle {
-            font-size: 38px;
-            color: var(--primary-navy);
-            margin-bottom: 8px;
+        .header-logo-wrapper {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 15px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--white);
+            border-radius: 18px;
+            border: 2px solid var(--primary-navy);
+            box-shadow: 0 4px 12px rgba(19, 42, 73, 0.1);
+        }
+
+        .header-logo-wrapper img {
+            width: 100%; height: 100%; object-fit: contain;
         }
 
         .welcome-title {
-            font-size: 13px;
+            font-size: 16px;
             color: var(--text-gray);
-            letter-spacing: 3px;
+            margin-bottom: 5px;
         }
 
-        /* ----- بار الأقسام ----- */
+        .brand-subtitle {
+            font-size: 36px;
+            color: var(--primary-navy);
+        }
+
+        /* ----- بار الأقسام المطور ----- */
         .categories-container {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            padding: 20px;
+            gap: 12px;
+            padding: 15px;
             position: sticky;
             top: 0;
-            background: rgba(240, 232, 209, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: rgba(240, 232, 209, 0.93);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             z-index: 10;
-            border-bottom: 1px solid var(--border-elegant);
+            border-bottom: 1px solid rgba(19, 42, 73, 0.08);
+            overflow-x: auto;
         }
 
         .cat-btn {
             background: transparent;
-            color: var(--text-gray);
-            border: none;
-            padding: 8px 10px;
+            color: var(--primary-navy);
+            border: 2px solid var(--primary-navy);
+            padding: 8px 24px;
+            border-radius: 12px;
             font-size: 16px;
             cursor: pointer;
-            transition: color 0.3s ease;
+            white-space: nowrap;
         }
 
         .cat-btn.active {
-            color: var(--primary-navy);
-            font-weight: 700;
-            border-bottom: 2px solid var(--primary-navy);
+            background: var(--primary-navy);
+            color: var(--bg-color);
         }
 
-        /* ----- حاوية الكروت ----- */
+        /* ----- حاوية وتصميم الكروت الجديد (تنسيق ممتد كامل ومميز) ----- */
         .menu-container {
-            max-width: 700px;
-            margin: 40px auto;
-            padding: 0 24px;
+            max-width: 650px;
+            margin: 25px auto;
+            padding: 0 20px;
         }
 
         .item-card {
             background: var(--card-bg);
-            border: 1px solid var(--border-elegant);
-            border-radius: 4px;
-            padding: 30px;
-            margin-bottom: 24px;
-            box-shadow: 0 4px 20px rgba(19, 42, 73, 0.02);
+            border-radius: 16px;
+            padding: 22px;
+            margin-bottom: 18px;
+            display: flex;
+            flex-direction: column; /* جعل العناصر منسقة طولياً بمرونة */
+            gap: 12px;
+            box-shadow: 0 4px 18px rgba(19, 42, 73, 0.03);
+            border: 1px solid rgba(19, 42, 73, 0.06);
+            position: relative;
         }
 
-        .item-main-line {
+        .item-header-row {
             display: flex;
-            align-items: baseline;
             justify-content: space-between;
-            margin-bottom: 12px;
-        }
-
-        .names-group {
-            display: flex;
             align-items: center;
-            gap: 10px;
-            flex: 1;
+            width: 100%;
         }
 
-        .en-name {
-            font-size: 17px;
-            font-weight: 700;
+        .item-names {
+            display: flex;
+            flex-direction: column; /* الاسم الإنجليزي فوق والعربي تحت بتنسيق فخم */
+            gap: 4px;
+        }
+
+        .en-name { 
+            font-size: 17px; 
+            font-weight: 700; 
+            color: var(--primary-navy); 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px; 
+        }
+        
+        .ar-name { 
+            font-size: 14px; 
+            font-weight: 600; 
+            color: var(--text-gray); 
+        }
+
+        .price-badge {
+            background: rgba(19, 42, 73, 0.06);
             color: var(--primary-navy);
-        }
-
-        .dots-separator {
-            flex: 1;
-            border-bottom: 1px dotted rgba(19, 42, 73, 0.2);
-            margin: 0 15px;
-            align-self: center;
-        }
-
-        .ar-name {
-            font-size: 14px;
-            font-weight: 400;
-            color: var(--text-gray);
-        }
-
-        .item-price {
-            font-size: 17px;
-            color: var(--primary-navy);
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 16px;
             font-weight: 700;
             white-space: nowrap;
         }
 
-        .item-description {
-            font-size: 13px;
-            color: var(--text-gray);
-            line-height: 1.7;
-            max-width: 90%;
+        /* أزرار لوحة التحكم للمنتج */
+        .captain-actions { 
+            display: none; 
+            gap: 8px; 
+            justify-content: flex-end;
+            border-top: 1px dashed rgba(19, 42, 73, 0.1);
+            padding-top: 10px;
         }
+        .btn-edit { background: #007aff; color: white; border: none; padding: 6px 16px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: bold; }
+        .btn-delete { background: #ff3b30; color: white; border: none; padding: 6px 16px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: bold; }
 
         footer {
+            max-width: 650px;
+            margin: 50px auto 20px auto;
             text-align: center;
-            padding: 60px 20px 40px 20px;
-            border-top: 1px solid var(--border-elegant);
-            max-width: 700px;
-            margin: 0 auto;
+            padding: 20px;
+            border-top: 1px solid rgba(19, 42, 73, 0.1);
         }
 
-        .footer-info {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            font-size: 13px;
-            color: var(--text-gray);
+        .footer-info { display: flex; justify-content: center; gap: 30px; font-size: 14px; color: var(--text-gray); }
+
+        /* ----- لوحة التحكم (وضع الكابتن) ----- */
+        .captain-panel {
+            position: fixed;
+            bottom: 0; left: 0; width: 100%;
+            background: var(--white);
+            border-top: 4px solid var(--primary-navy);
+            padding: 20px;
+            z-index: 100;
+            box-shadow: 0 -8px 30px rgba(0,0,0,0.1);
+            display: none;
+            max-height: 80vh;
+            overflow-y: auto;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .panel-section {
+            background: rgba(19, 42, 73, 0.02);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border: 1px dashed rgba(19, 42, 73, 0.15);
+        }
+
+        .panel-section-title { font-size: 15px; margin-bottom: 10px; color: var(--primary-navy); }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .form-grid input, .form-grid select {
+            background: var(--bg-color);
+            border: 1px solid rgba(19, 42, 73, 0.15);
+            color: var(--primary-navy);
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .logo-upload-btn {
+            display: block;
+            background: #eef2f7;
+            border: 2px dashed var(--primary-navy);
+            padding: 12px;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--primary-navy);
+        }
+
+        .btn-add-item {
+            background: var(--primary-navy);
+            color: var(--bg-color);
+            border: none;
+            padding: 14px;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .toggle-captain-btn {
+            position: fixed;
+            bottom: 25px; left: 25px;
+            background: var(--white);
+            border: 2px solid var(--primary-navy);
+            color: var(--primary-navy);
+            padding: 12px 20px;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 101;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .toggle-captain-btn.active {
+            background: var(--primary-navy);
+            color: var(--bg-color);
         }
     </style>
-
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 </head>
 <body>
 
+    <!-- الشاشة الترحيبية -->
     <div class="welcome-splash" id="welcomeSplash">
-        <div class="logo-container">
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 720 960'><rect width='720' height='960' fill='black'/><path d='M360 144c11.5 0 21 9.5 21 21v24c29.5 5 57 16.5 81 33.5l17-17c8-8 21.5-8 29.5 0s8 21.5 0 29.5l-17 17c17 24 28.5 51.5 33.5 81h24c11.5 0 21 9.5 21 21s-9.5 21-21 21h-24c-5 29.5-16.5 57-33.5 81l17 17c8 8 8 21.5 0 29.5s-21.5 8-29.5 0l-17-17c-24 17-51.5 28.5-81 33.5v24c0 11.5-9.5 21-21 21s-21-9.5-21-21v-24c-29.5-5-57-16.5-81-33.5l-17 17c-8 8-21.5 8-29.5 0s-8-21.5 0-29.5l17-17c-17-24-28.5-51.5-33.5-81h-24c-11.5 0-21-9.5-21-21s9.5-21 21-21h24c5-29.5 16.5-57 33.5-81l-17-17c-8-8-8-21.5 0-29.5s21.5-8 29.5 0l17 17c24-17 51.5-28.5 81-33.5v-24c0-11.5 9.5-21 21-21zm0 56c-84 0-152 68-152 152s68 152 152 152 152-68 152-152-68-152-152-152zm-35 83c2.5-3.5 6.5-5.5 11-5.5s8.5 2 11 5.5l13 18.5c5.5-2.5 11.5-4 18-4 23 0 42 19 42 42s-19 42-42 42c-6.5 0-12.5-1.5-18-4l-13 18.5c-2.5 3.5-6.5 5.5-11 5.5s-8.5-2-11-5.5l-13-18.5c-5.5 2.5-11.5 4-18 4-23 0-42-19-42-42s19-42 42-42c6.5 0 12.5 1.5 18 4l13-18.5zm35 159c43.5 0 79-35.5 79-79s-35.5-79-79-79-79 35.5-79 79 35.5 79 79 79zm-75-79c0 14 7.5 26 18.5 33l-10 14c-17-11-28.5-30-28.5-52 0-35 28.5-63 63-63 22 0 41 11.5 52 28.5l-14 10c-7-11-19-18.5-33-18.5-24 0-46 22-46 48zm121 33c11-7 18.5-19 18.5-33 0-26-22-48-46-48-14 0-26 7.5-33 18.5l-14-10c11-17 30-28.5 52-28.5 35 0 63 28.5 63 63 0 22-11.5 41-28.5 52l-10-14zM360 550c82.5 0 150 67.5 150 150v5c0 8.5-6.5 15-15 15H225c-8.5 0-15-6.5-15-15v-5c0-82.5 67.5-150 150-150zm120 140c-11.5-44.5-47.5-78.5-92.5-86v13.5c0 15-12.5 27.5-27.5 27.5S332.5 632.5 332.5 617.5v-13.5c-45 7.5-81 41.5-92.5 86H480zm-147.5-72.5c0 4 3.5 7.5 7.5 7.5s7.5-3.5 7.5-7.5V600h-15v47.5zm19 25c6-4 13.5-6.5 21-6.5s15 2.5 21 6.5l8.5-12.5c-8.5-6-18.5-9-29.5-9s-21 3-29.5 9l10 13zM280 630c0-11 9-20 20-20s20 9 20 20-9 20-20 20-20-9-20-20zm400 130H40v40h640v-40zM224 850c0-21.5 12-39 31.5-48.5l9 18c-12 5.5-19 15-19 30.5s7 25 19 30.5l-9 18c-19.5-9.5-31.5-27-31.5-48.5zm70-46h21l22 92h-21l-5-24h-34l-5 24h-21l22-92zm-12 50h24l-12-54-12 54zm102-50c18.5 0 31.5 11 31.5 28.5S402.5 861 384 861h-17v31h-21v-92h38zm-17 38h16c8 0 12.5-4 12.5-10s-4.5-10-12.5-10h-16v20zm125-38v18h-28v19h25v17h-25v20h28v18h-49v-92h49zm46 0c14.5 0 25.5 4.5 31.5 13.5l-15 12c-4-5.5-9.5-8.5-16.5-8.5-11 0-18.5 8.5-18.5 21s7.5 21 18.5 21c7 0 12.5-3 16.5-8.5l15 12c-6 9-17 13.5-31.5 13.5-24.5 0-39.5-17.5-39.5-43s15-43 39.5-43zm62 18v74h-21v-74h-23v-18h67v18h-23zm52-18h21l22 92h-21l-5-24h-34l-5 24h-21l22-92zm-12 50h24l-12-54-12 54zm54-50v92h-21v-92h21zm75 0v92h-19l-34-51v51h-20v-92h19l34 50v-50h20z'/></svg>" alt="COFFEE ALCAPTAIN LOGO">
+        <div class="logo-wrapper" id="splashLogoContainer">
+            <div class="logo-placeholder">☕</div>
         </div>
-        <h2 class="splash-title">أهلاً بكم في عالم المذاق الرفيع</h2>
+        <h2 class="splash-title">رحلة مذاق لا تنسى</h2>
         <div class="splash-brand">COFFEE ALCAPTAIN</div>
-        <button class="btn-enter-menu" onclick="dismissSplash()">استكشاف المنيو</button>
+        <button class="btn-enter-menu" onclick="dismissSplash()">عرض المنيو</button>
     </div>
 
+    <!-- رأس الصفحة -->
     <header>
-        <div class="header-logo">
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 720 960'><rect width='720' height='960' fill='black'/><path d='M360 144c11.5 0 21 9.5 21 21v24c29.5 5 57 16.5 81 33.5l17-17c8-8 21.5-8 29.5 0s8 21.5 0 29.5l-17 17c17 24 28.5 51.5 33.5 81h24c11.5 0 21 9.5 21 21s-9.5 21-21 21h-24c-5 29.5-16.5 57-33.5 81l17 17c8 8 8 21.5 0 29.5s-21.5 8-29.5 0l-17-17c-24 17-51.5 28.5-81 33.5v24c0 11.5-9.5 21-21 21s-21-9.5-21-21v-24c-29.5-5-57-16.5-81-33.5l-17 17c-8 8-21.5 8-29.5 0s-8-21.5 0-29.5l17-17c-17-24-28.5-51.5-33.5-81h-24c-11.5 0-21-9.5-21-21s9.5-21 21-21h24c5-29.5 16.5-57 33.5-81l-17-17c-8-8-8-21.5 0-29.5s21.5-8 29.5 0l17 17c24-17 51.5-28.5 81-33.5v-24c0-11.5 9.5-21 21-21zm0 56c-84 0-152 68-152 152s68 152 152 152 152-68 152-152-68-152-152-152zm-35 83c2.5-3.5 6.5-5.5 11-5.5s8.5 2 11 5.5l13 18.5c5.5-2.5 11.5-4 18-4 23 0 42 19 42 42s-19 42-42 42c-6.5 0-12.5-1.5-18-4l-13 18.5c-2.5 3.5-6.5 5.5-11 5.5s-8.5-2-11-5.5l-13-18.5c-5.5 2.5-11.5 4-18 4-23 0-42-19-42-42s19-42 42-42c6.5 0 12.5 1.5 18 4l13-18.5zm35 159c43.5 0 79-35.5 79-79s-35.5-79-79-79-79 35.5-79 79 35.5 79 79 79zm-75-79c0 14 7.5 26 18.5 33l-10 14c-17-11-28.5-30-28.5-52 0-35 28.5-63 63-63 22 0 41 11.5 52 28.5l-14 10c-7-11-19-18.5-33-18.5-24 0-46 22-46 48zm121 33c11-7 18.5-19 18.5-33 0-26-22-48-46-48-14 0-26 7.5-33 18.5l-14-10c11-17 30-28.5 52-28.5 35 0 63 28.5 63 63 0 22-11.5 41-28.5 52l-10-14zM360 550c82.5 0 150 67.5 150 150v5c0 8.5-6.5 15-15 15H225c-8.5 0-15-6.5-15-15v-5c0-82.5 67.5-150 150-150zm120 140c-11.5-44.5-47.5-78.5-92.5-86v13.5c0 15-12.5 27.5-27.5 27.5S332.5 632.5 332.5 617.5v-13.5c-45 7.5-81 41.5-92.5 86H480zm-147.5-72.5c0 4 3.5 7.5 7.5 7.5s7.5-3.5 7.5-7.5V600h-15v47.5zm19 25c6-4 13.5-6.5 21-6.5s15 2.5 21 6.5l8.5-12.5c-8.5-6-18.5-9-29.5-9s-21 3-29.5 9l10 13zM280 630c0-11 9-20 20-20s20 9 20 20-9 20-20 20-20-9-20-20zm400 130H40v40h640v-40zM224 850c0-21.5 12-39 31.5-48.5l9 18c-12 5.5-19 15-19 30.5s7 25 19 30.5l-9 18c-19.5-9.5-31.5-27-31.5-48.5zm70-46h21l22 92h-21l-5-24h-34l-5 24h-21l22-92zm-12 50h24l-12-54-12 54zm102-50c18.5 0 31.5 11 31.5 28.5S402.5 861 384 861h-17v31h-21v-92h38zm-17 38h16c8 0 12.5-4 12.5-10s-4.5-10-12.5-10h-16v20zm125-38v18h-28v19h25v17h-25v20h28v18h-49v-92h49zm46 0c14.5 0 25.5 4.5 31.5 13.5l-15 12c-4-5.5-9.5-8.5-16.5-8.5-11 0-18.5 8.5-18.5 21s7.5 21 18.5 21c7 0 12.5-3 16.5-8.5l15 12c-6 9-17 13.5-31.5 13.5-24.5 0-39.5-17.5-39.5-43s15-43 39.5-43zm62 18v74h-21v-74h-23v-18h67v18h-23zm52-18h21l22 92h-21l-5-24h-34l-5 24h-21l22-92zm-12 50h24l-12-54-12 54zm102-50c18.5 0 31.5 11 31.5 28.5S402.5 861 384 861h-17v31h-21v-92h38zm-17 38h16c8 0 12.5-4 12.5-10s-4.5-10-12.5-10h-16v20zm125-38v18h-28v19h25v17h-25v20h28v18h-49v-92h49zm46 0c14.5 0 25.5 4.5 31.5 13.5l-15 12c-4-5.5-9.5-8.5-16.5-8.5-11 0-18.5 8.5-18.5 21s7.5 21 18.5 21c7 0 12.5-3 16.5-8.5l15 12c-6 9-17 13.5-31.5 13.5-24.5 0-39.5-17.5-39.5-43s15-43 39.5-43zm62 18v74h-21v-74h-23v-18h67v18h-23zm52-18h21l22 92h-21l-5-24h-34l-5 24h-21l22-92zm-12 50h24l-12-54-12 54zm54-50v92h-21v-92h21zm75 0v92h-19l-34-51v51h-20v-92h19l34 50v-50h20z'/></svg>" alt="COFFEE ALCAPTAIN LOGO">
+        <div class="header-logo-wrapper" id="headerLogoContainer">
+            <div class="logo-placeholder" style="font-size:35px;">☕</div>
         </div>
+        <h2 class="welcome-title">رحلة مذاق لا تنسى</h2>
         <div class="brand-subtitle">COFFEE ALCAPTAIN</div>
-        <h2 class="welcome-title">— قائمة المأكولات والمشروبات الفاخرة —</h2>
     </header>
 
+    <!-- بار الأقسام -->
     <div class="categories-container">
-        <button class="cat-btn active" onclick="switchCategory('shisha', event)">الأراغيل الملكية</button>
-        <button class="cat-btn" onclick="switchCategory('cold', event)">المشروبات الباردة</button>
-        <button class="cat-btn" onclick="switchCategory('hot', event)">المشروبات الساخنة</button>
+        <button class="cat-btn active" onclick="switchCategory('shisha', event)">💨 الأراغيل</button>
+        <button class="cat-btn" onclick="switchCategory('cold', event)">🍹 المشروبات الباردة</button>
+        <button class="cat-btn" onclick="switchCategory('hot', event)">☕ المشروبات الساخنة</button>
     </div>
 
+    <!-- حاوية عرض الأطباق الديناميكية -->
     <div class="menu-container" id="menu-items-wrapper"></div>
 
+    <!-- الفوتر السفلي -->
     <footer>
         <div class="footer-info">
-            <div>📍 العاصمة الكرادة داخل</div>
-            <div style="direction: ltr;">📞 +964 770 000 0000</div>
+            <div class="info-item">📍 الكرادة داخل</div>
+            <div class="info-item" style="direction: ltr;">📞 077000000</div>
         </div>
     </footer>
 
+    <!-- زر التحكم الخاص بالكابتن -->
+    <button class="toggle-captain-btn" onclick="toggleCaptainMode()">⚙️ وضع الكابتن</button>
+
+    <!-- لوحة التحكم الخلفية -->
+    <div class="captain-panel" id="captainPanel">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+            <h3 style="color: var(--primary-navy);">لوحة التحكم والتعديل السريع</h3>
+            <span style="font-size: 12px; color: var(--text-gray);">إدارة الكافيه</span>
+        </div>
+
+        <div class="panel-section">
+            <div class="panel-section-title">🖼️ إدارة لوجو الكافيه الرئيسي</div>
+            <label class="logo-upload-btn">
+                📁 اضغط هنا لاختيار صورة اللوجو من جهازك
+                <input type="file" id="logoInput" accept="image/*" style="display: none;" onchange="handleLogoUpload(this)">
+            </label>
+            <div id="uploadStatus" style="font-size: 12px; text-align: center; margin-top: 5px; color: green; display: none;">تم حفظ وتحديث اللوجو بنجاح!</div>
+        </div>
+
+        <div class="panel-section">
+            <div class="panel-section-title">🍔 إضافة أو تعديل المنتجات</div>
+            <div class="form-grid">
+                <input type="text" id="prodEnName" placeholder="الاسم بالإنكليزي (DOUBLE APPLE)">
+                <input type="text" id="prodArName" placeholder="الاسم بالعربي (تفاحتين نخلة)">
+                <input type="number" id="prodPrice" placeholder="السعر (5000)">
+                <select id="prodCat">
+                    <option value="shisha">الأراغيل</option>
+                    <option value="cold">المشروبات الباردة</option>
+                    <option value="hot">المشروبات الساخنة</option>
+                </select>
+            </div>
+            <button class="btn-add-item" onclick="addNewItem()">➕ إضافة / تحديث المنتج</button>
+        </div>
+    </div>
+
     <script>
-        // إعدادات اتصال سيرفر الـ Firebase الخاصة بك
-        // ⚠️ تأكد من وضع بيانات مشروعك هنا ليرتبط بقاعدة بياناتك الحيّة
-        const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_AUTH_DOMAIN",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_STORAGE_BUCKET",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID"
-        };
-
-        // تشغيل Firebase
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-
         function dismissSplash() {
             const splash = document.getElementById('welcomeSplash');
             splash.classList.add('fade-out');
-            setTimeout(() => { splash.style.display = 'none'; }, 800);
+            setTimeout(() => { splash.style.display = 'none'; }, 600);
         }
 
+        document.addEventListener("DOMContentLoaded", () => {
+            loadSavedLogo();
+        });
+
+        function loadSavedLogo() {
+            const savedLogo = localStorage.getItem("captain_custom_logo");
+            if (savedLogo) {
+                document.getElementById("splashLogoContainer").innerHTML = `<img src="${savedLogo}" alt="COFFEE ALCAPTAIN">`;
+                document.getElementById("headerLogoContainer").innerHTML = `<img src="${savedLogo}" alt="COFFEE ALCAPTAIN">`;
+            }
+        }
+
+        function handleLogoUpload(input) {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const base64Data = e.target.result;
+                    try {
+                        localStorage.setItem("captain_custom_logo", base64Data);
+                        loadSavedLogo();
+                        const status = document.getElementById("uploadStatus");
+                        status.style.display = "block";
+                        setTimeout(() => { status.style.display = "none"; }, 3000);
+                    } catch (error) {
+                        alert("حجم الصورة كبير جداً يا كابتن! يرجى اختيار صورة أصغر حجماً لتفادي امتلاء ذاكرة المتصفح.");
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // إعدادات اتصال قاعدة بيانات Firebase المستهدفة
+        const firebaseConfig = {
+            databaseURL: "https://cofe1-6d9c5-default-rtdb.firebaseio.com/"
+        };
+        
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database().ref("menu_items");
+
+        let menuData = [];
         let currentCategory = 'shisha';
+        let isCaptainMode = false;
+        let editTargetId = null;
 
-        // جلب البيانات بشكل حي وديناميكي مباشرة من السيرفر
-        function fetchAndRenderMenu() {
+        db.on('value', (snapshot) => {
+            const data = snapshot.val();
+            if (data) {
+                menuData = Object.keys(data).map(key => ({ id: key, ...data[key] }));
+            } else {
+                const defaultMenu = [
+                    { en: "Double Apple", ar: "تفاحتين نخلة", price: "7,000", cat: "shisha" },
+                    { en: "Gum & Mint", ar: "علكة ونعناع", price: "6,000", cat: "shisha" },
+                    { en: "Lemon Mint", ar: "ليمون ونعناع عصير", price: "4,500", cat: "cold" },
+                    { en: "Iced Latte", ar: "آيس لاتيه", price: "5,000", cat: "cold" },
+                    { en: "Turkish Coffee", ar: "قهوة تركية", price: "3,000", cat: "hot" },
+                    { en: "Mix Tea", ar: "شاي مخدر هيل", price: "1,500", cat: "hot" }
+                ];
+                defaultMenu.forEach(item => db.push(item));
+                return;
+            }
+            renderMenu();
+        });
+
+        function renderMenu() {
             const wrapper = document.getElementById('menu-items-wrapper');
-            wrapper.innerHTML = '<p style="text-align:center; color:var(--text-gray);">جاري تحميل المنيو الفاخر من السيرفر...</p>';
+            wrapper.innerHTML = '';
+            const filtered = menuData.filter(item => item.cat === currentCategory);
 
-            db.collection("menu_items").where("cat", "==", currentCategory)
-            .get()
-            .then((querySnapshot) => {
-                wrapper.innerHTML = '';
-                
-                if (querySnapshot.empty) {
-                    wrapper.innerHTML = '<p style="text-align:center; color:var(--text-gray);">لا توجد عناصر في هذا القسم حالياً.</p>';
-                    return;
-                }
+            if(filtered.length === 0) {
+                wrapper.innerHTML = `<p style="text-align:center; padding:30px; color: var(--text-gray); background: var(--white); border-radius:16px;">لا توجد منتجات في هذا القسم حالياً.</p>`;
+                return;
+            }
 
-                querySnapshot.forEach((doc) => {
-                    const item = doc.data();
-                    const card = document.createElement('div');
-                    card.className = 'item-card';
-                    card.innerHTML = `
-                        <div class="item-info">
-                            <div class="item-main-line">
-                                <div class="names-group">
-                                    <span class="en-name">${item.en || ''}</span>
-                                    <span class="dots-separator"></span>
-                                    <span class="ar-name">${item.ar || ''}</span>
-                                </div>
-                                <span class="item-price">${item.price || '0'} د.ع</span>
-                            </div>
-                            <p class="item-description">${item.desc || ''}</p>
+            filtered.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'item-card';
+                card.innerHTML = `
+                    <div class="item-header-row">
+                        <div class="item-names">
+                            <span class="en-name">${item.en}</span>
+                            <span class="ar-name">${item.ar}</span>
                         </div>
-                    `;
-                    wrapper.appendChild(card);
-                });
-            })
-            .catch((error) => {
-                console.error("Error fetching documents: ", error);
-                wrapper.innerHTML = '<p style="text-align:center; color:red;">حدث خطأ أثناء الاتصال بالسيرفر. يرجى التحقق من الإعدادات.</p>';
+                        <div class="price-badge">${item.price} د.ع</div>
+                    </div>
+                    <div class="captain-actions" style="display: ${isCaptainMode ? 'flex' : 'none'}">
+                        <button class="btn-edit" onclick="prepEdit('${item.id}')">تعديل</button>
+                        <button class="btn-delete" onclick="deleteItem('${item.id}')">حذف</button>
+                    </div>
+                `;
+                wrapper.appendChild(card);
             });
         }
 
@@ -392,12 +548,78 @@
             currentCategory = cat;
             document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
             if(event && event.target) { event.target.classList.add('active'); }
-            fetchAndRenderMenu();
+            renderMenu();
         }
 
-        document.addEventListener("DOMContentLoaded", () => {
-            fetchAndRenderMenu();
-        });
+        function toggleCaptainMode() {
+            if (!isCaptainMode) {
+                let password = prompt("الرجاء إدخال رمز قفل الكابتن للدخول إلى لوحة الإدارة:");
+                if (password !== "0000") {
+                    alert("الرمز غير صحيح يا كابتن!");
+                    return;
+                }
+            }
+
+            isCaptainMode = !isCaptainMode;
+            const btn = document.querySelector('.toggle-captain-btn');
+            const panel = document.getElementById('captainPanel');
+            
+            if(isCaptainMode) {
+                btn.classList.add('active');
+                panel.style.display = 'block';
+            } else {
+                btn.classList.remove('active');
+                panel.style.display = 'none';
+                editTargetId = null;
+                clearForm();
+            }
+            renderMenu();
+        }
+
+        function addNewItem() {
+            const en = document.getElementById('prodEnName').value.trim();
+            const ar = document.getElementById('prodArName').value.trim();
+            const priceNum = document.getElementById('prodPrice').value.trim();
+            const cat = document.getElementById('prodCat').value;
+
+            if(!en || !ar || !priceNum) {
+                alert('الرجاء ملء كافة الحقول أولاً يا كابتن!');
+                return;
+            }
+
+            const price = parseFloat(priceNum).toLocaleString('en-US');
+
+            if(editTargetId) {
+                firebase.database().ref("menu_items/" + editTargetId).set({ en, ar, price, cat })
+                .then(() => { editTargetId = null; clearForm(); });
+            } else {
+                db.push({ en, ar, price, cat }).then(() => { clearForm(); });
+            }
+        }
+
+        function prepEdit(id) {
+            const item = menuData.find(i => i.id === id);
+            if(item) {
+                document.getElementById('prodEnName').value = item.en;
+                document.getElementById('prodArName').value = item.ar;
+                document.getElementById('prodPrice').value = item.price.replace(/,/g, '');
+                document.getElementById('prodCat').value = item.cat;
+                editTargetId = id;
+                document.getElementById('prodEnName').focus();
+            }
+        }
+
+        function deleteItem(id) {
+            if(confirm('هل أنت متأكد من حذف هذا المنتج؟')) {
+                firebase.database().ref("menu_items/" + id).remove();
+            }
+        }
+
+        function clearForm() {
+            document.getElementById('prodEnName').value = '';
+            document.getElementById('prodArName').value = '';
+            document.getElementById('prodPrice').value = '';
+        }
     </script>
 </body>
 </html>
