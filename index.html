@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE LUXE RESTAURANT | المنيو الفاخر</title>
+    
+    <!-- استدعاء خطوط فاخرة ونحيفة تناسب الفنادق والمطاعم الراقية -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Cairo:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #0D0D0D;           /* الأسود الفاحم للخلفية الأساسية */
+            --card-bg: #141414;          /* الرمادي الداكن جداً لكروت الطعام */
+            --gold-primary: #C5A880;     /* الذهبي المطفي الفخم للعناوين والأسعار */
+            --gold-glow: rgba(197, 168, 128, 0.25); /* توهج الوميض الذهبي */
+            --text-white: #E5E5E5;        /* الأبيض العاجي لأسماء الأطباق */
+            --text-muted: #8C8C8C;        /* الرمادي الخافت للوصف والتفاصيل */
+            --border-color: #1A1A1A;      /* لون الحدود الناعمة */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            font-family: "Cairo", sans-serif;
+            font-weight: 300;
+            overflow-x: hidden;
+            padding-bottom: 60px;
+        }
+
+        /* 🔤 تخصيص خط Marcellus العالمي الفخم للأسماء اللاتينية والعناوين الرئيسية */
+        h1, .brand-title, .splash-brand, .en-name, .item-price {
+            font-family: 'Marcellus', serif !important;
+            letter-spacing: 1px;
+        }
+
+        /* ----- ✨ تأثير الوميض والتوهج الذهبي المنبثق بمجرد مرور الماوس أو الإصبع ----- */
+        .cat-btn, .item-card, .btn-enter-menu {
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* التفاعل الفوري بمجرد اللمس أو مرور الماوس */
+        .cat-btn:hover, .item-card:hover, .btn-enter-menu:hover,
+        .cat-btn:active, .item-card:active, .btn-enter-menu:active {
+            transform: translateY(-3px);
+            border-color: var(--gold-primary) !important;
+            box-shadow: 0 0 25px 4px var(--gold-glow) !important;
+            z-index: 5;
+        }
+
+        /* نبضة ضوئية ناعمة تتوسع للخارج خلف العنصر */
+        .cat-btn::after, .item-card::after, .btn-enter-menu::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: inherit;
+            box-shadow: 0 0 0 0 rgba(197, 168, 128, 0.4);
+            opacity: 0;
+            transition: all 0.5s ease;
+            pointer-events: none;
+        }
+
+        .cat-btn:hover::after, .item-card:hover::after, .btn-enter-menu:hover::after {
+            box-shadow: 0 0 0 15px rgba(197, 168, 128, 0);
+            opacity: 1;
+        }
+
+        /* ----- تصميم الشاشة الترحيبية الفاخرة ----- */
+        .welcome-splash {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-dark);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .welcome-splash.fade-out {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-100%);
+        }
+
+        .logo-inner {
+            font-size: 40px;
+            color: var(--gold-primary);
+            margin-bottom: 25px;
+            border: 1px solid var(--gold-primary);
+            width: 90px;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(197, 168, 128, 0.1);
+        }
+
+        .splash-title {
+            font-size: 13px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+
+        .splash-brand {
+            font-size: 32px;
+            color: var(--gold-primary);
+            font-weight: 400;
+            margin-bottom: 35px;
+        }
+
+        .btn-enter-menu {
+            background: transparent;
+            color: var(--gold-primary);
+            border: 1px solid var(--gold-primary);
+            padding: 14px 50px;
+            font-size: 14px;
+            border-radius: 0; /* الزوايا الحادة تعطي انطباعاً أكثر فخامة ورسمية */
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* ----- رأس الصفحة (Header) ----- */
+        header {
+            text-align: center;
+            padding: 60px 20px 40px 20px;
+        }
+
+        .brand-title {
+            font-size: 36px;
+            color: var(--gold-primary);
+            font-weight: 400;
+            margin-bottom: 5px;
+        }
+
+        .brand-subtitle {
+            font-size: 12px;
+            color: var(--text-muted);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        /* ----- بار الأقسام المطور ----- */
+        .categories-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            background: rgba(13, 13, 13, 0.85);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            z-index: 10;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .cat-btn {
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            padding: 10px 28px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cat-btn.active {
+            color: var(--gold-primary);
+            border-color: var(--gold-primary);
+            background: rgba(197, 168, 128, 0.03);
+        }
+
+        /* ----- حاوية القائمة والكروت ----- */
+        .menu-container {
+            max-width: 750px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .item-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 25px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .item-info {
+            flex: 1;
+        }
+
+        .item-main-line {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .names-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .en-name {
+            font-size: 18px;
+            color: var(--text-white);
+            font-weight: 400;
+        }
+
+        .ar-name {
+            font-size: 15px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .item-price {
+            font-size: 18px;
+            color: var(--gold-primary);
+            font-weight: 400;
+        }
+
+        /* إضافة وصف للمكونات لإعطاء الطابع الفخم للمطاعم العالمية */
+        .item-description {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            font-weight: 300;
+            max-width: 85%;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 5px;
+        }
+
+        .footer-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            font-size: 12px;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- الشاشة الترحيبية الفاخرة -->
+    <div class="welcome-splash" id="welcomeSplash">
+        <div class="logo-inner">👑</div>
+        <h2 class="splash-title">Fine Dining Experience</h2>
+        <div class="splash-brand">THE LUXE RESTAURANT</div>
+        <button class="btn-enter-menu" onclick="dismissSplash()">Explore The Menu</button>
+    </div>
+
+    <!-- رأس الصفحة الفاخر -->
+    <header>
+        <h1 class="brand-title">THE LUXE</h1>
+        <p class="brand-subtitle">Signature Menu</p>
+    </header>
+
+    <!-- الأقسام الفاخرة -->
+    <div class="categories-container">
+        <button class="cat-btn active" onclick="switchCategory('starters', event)">المقبلات الفاخرة</button>
+        <button class="cat-btn" onclick="switchCategory('mains', event)">الأطباق الرئيسية</button>
+        <button class="cat-btn" onclick="switchCategory('desserts', event)">الحلويات والمشروبات</button>
+    </div>
+
+    <!-- حاوية عرض الأطباق -->
+    <div class="menu-container" id="menu-items-wrapper"></div>
+
+    <footer>
+        <div class="footer-info">
+            <div>📍 المنطقة العالمية الفاخرة</div>
+            <div style="direction: ltr;">📞 +964 770 000 0000</div>
+        </div>
+    </footer>
+
+    <script>
+        // إخفاء الشاشة الترحيبية بسلاسة
+        function dismissSplash() {
+            const splash = document.getElementById('welcomeSplash');
+            splash.classList.add('fade-out');
+            setTimeout(() => { splash.style.display = 'none'; }, 800);
+        }
+
+        // بيانات المنيو المحلية (بدون سيرفر نهائياً لسهولة العرض والتعديل السريع)
+        const localMenuData = [
+            // قسم المقبلات
+            { id: "1", en: "Wagyu Carpaccio", ar: "كارباتشيو واغيو", price: "24,000", desc: "شرائح لحم الواغيو الياباني الرفيعة مع زيت الكمأة الأسود، وجبن البارميزان المعتق ورذاذ الليمون السقلي.", cat: "starters" },
+            { id: "2", en: "Truffle Burrata", ar: "بوراتا الكمأة", price: "18,500", desc: "جبن البوراتا الإيطالي الطازج يقدم على فِراش من الطماطم الكرزية البرية، معجون الترافل النقي، والريحان العضوي.", cat: "starters" },
+            
+            // قسم الأطباق الرئيسية
+            { id: "3", en: "Black Cod Glaze", ar: "البلاك كود الفاخر", price: "45,000", desc: "سمك القد الأسود المطهو ببطء والمتبل بصلصة الميسو الحلوة، يقدم مع هريس الهليون البري المقرمش.", cat: "mains" },
+            { id: "4", en: "Ribeye Steak", ar: "ستيك ريب آي معتق", price: "52,000", desc: "قطعة ستيك ريب آي ممتازة معتقة لـ 28 يوماً، مشوية على الفحم، تقدم مع صوص الفطر البري وزبدة الأعشاب.", cat: "mains" },
+            
+            // قسم الحلويات والمشروبات
+            { id: "5", en: "Golden Saffron Fondant", ar: "فوندان الزعفران الذهبي", price: "15,000", desc: "كيك الفوندان الساخن والمحشو بقلب سائل من كاسترد الزعفران الملكي، يقدم مع آيس كريم الفانيليا النادرة.", cat: "desserts" },
+            { id: "6", en: "Royal Espresso Martini", ar: "إسبريسو مارتيني الملكي", price: "9,000", desc: "مزيج فاخر من قهوة الإسبريسو المستخلصة طازجاً مع نكهات الكراميل المملح المقطر ورغوة ذهبية كثيفة.", cat: "desserts" }
+        ];
+
+        let currentCategory = 'starters';
+
+        // عرض المنتجات بناءً على القسم المحدد
+        function renderMenu() {
+            const wrapper = document.getElementById('menu-items-wrapper');
+            wrapper.innerHTML = '';
+            
+            const filtered = localMenuData.filter(item => item.cat === currentCategory);
+
+            filtered.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'item-card';
+                card.innerHTML = `
+                    <div class="item-info">
+                        <div class="item-main-line">
+                            <div class="names-group">
+                                <span class="en-name">${item.en}</span>
+                                <span class="ar-name">${item.ar}</span>
+                            </div>
+                            <span class="item-price">${item.price} د.ع</span>
+                        </div>
+                        <p class="item-description">${item.desc}</p>
+                    </div>
+                `;
+                wrapper.appendChild(card);
+            });
+        }
+
+        // تبديل الأقسام
+        function switchCategory(cat, event) {
+            currentCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
+            if(event && event.target) { event.target.classList.add('active'); }
+            renderMenu();
+        }
+
+        // تشغيل القائمة تلقائياً عند تحميل الصفحة
+        document.addEventListener("DOMContentLoaded", () => {
+            renderMenu();
+        });
+    </script>
+</body>
+</html>
