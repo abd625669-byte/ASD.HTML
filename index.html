@@ -64,7 +64,7 @@
             z-index: 5;
         }
 
-        /* ----- 🖼️ مكان مخصص لتنسيق اللوجو الفخم ----- */
+        /* ----- 🖼️ تعديل وتنسيق حاويات اللوجو لمنع الاختفاء ----- */
         .logo-container {
             width: 110px;
             height: 110px;
@@ -75,7 +75,7 @@
             border: 2px solid var(--primary-navy);
             border-radius: 50%;
             background: #FFFFFF;
-            padding: 8px;
+            padding: 4px;
             box-shadow: 0 8px 20px rgba(19, 42, 73, 0.1);
             overflow: hidden;
         }
@@ -85,6 +85,7 @@
             height: 100%;
             object-fit: cover;
             border-radius: 50%;
+            display: block;
         }
 
         /* لوجو الهيدر الصغير */
@@ -95,11 +96,12 @@
             border: 1px solid var(--primary-navy);
             border-radius: 50%;
             background: #FFFFFF;
-            padding: 6px;
+            padding: 4px;
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 4px 10px rgba(19, 42, 73, 0.05);
         }
 
         .header-logo img {
@@ -107,6 +109,22 @@
             height: 100%;
             object-fit: cover;
             border-radius: 50%;
+            display: block;
+        }
+
+        /* بديل اللوجو النصي الفخم في حال تعذر التحميل */
+        .logo-fallback {
+            width: 100%;
+            height: 100%;
+            background: var(--primary-navy);
+            color: var(--bg-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 50%;
+            font-family: "El Messiri", sans-serif !important;
         }
 
         /* ----- الشاشة الترحيبية ----- */
@@ -290,26 +308,26 @@
 </head>
 <body>
 
-    <!-- الشاشة الترحيبية المضاف إليها اللوجو الخاص بك -->
+    <!-- الشاشة الترحيبية المضاف إليها اللوجو المباشر -->
     <div class="welcome-splash" id="welcomeSplash">
         <div class="logo-container">
-            <img src="https://i.ibb.co/5X2wz2QH/logo.png" alt="COFFEE ALCAPTAIN LOGO">
+            <img src="https://i.ibb.co/6wX6mJ8m/logo.png" alt="COFFEE ALCAPTAIN LOGO" onerror="handleLogoError(this)">
         </div>
         <h2 class="splash-title">أهلاً بكم في عالم المذاق الرفيع</h2>
         <div class="splash-brand">COFFEE ALCAPTAIN</div>
         <button class="btn-enter-menu" onclick="dismissSplash()">استكشاف المنيو</button>
     </div>
 
-    <!-- رأس الصفحة المضاف إليه اللوجو الخاص بك -->
+    <!-- رأس الصفحة المضاف إليه اللوجو المباشر -->
     <header>
         <div class="header-logo">
-            <img src="https://i.ibb.co/5X2wz2QH/logo.png" alt="COFFEE ALCAPTAIN LOGO">
+            <img src="https://i.ibb.co/6wX6mJ8m/logo.png" alt="COFFEE ALCAPTAIN LOGO" onerror="handleLogoError(this)">
         </div>
         <div class="brand-subtitle">COFFEE ALCAPTAIN</div>
         <h2 class="welcome-title">— قائمة المأكولات والمشروبات الفاخرة —</h2>
     </header>
 
-    <!-- بار الأقشان -->
+    <!-- بار الأقسام -->
     <div class="categories-container">
         <button class="cat-btn active" onclick="switchCategory('shisha', event)">الأراغيل الملكية</button>
         <button class="cat-btn" onclick="switchCategory('cold', event)">المشروبات الباردة</button>
@@ -327,6 +345,12 @@
     </footer>
 
     <script>
+        // إعداد ذكي للتعامل مع أي مشكلة في تحميل الصورة من خادم الرفع
+        function handleLogoError(imageElement) {
+            const parent = imageElement.parentElement;
+            parent.innerHTML = '<div class="logo-fallback">CA</div>';
+        }
+
         // إعدادات اتصال سيرفر الـ Firebase الخاصة بك
         // ⚠️ تأكد من ملء هذه البيانات ليرتبط المنيو بقاعدة بياناتك
         const firebaseConfig = {
