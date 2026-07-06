@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Kitchens | تصميم مطابخ فاخرة</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts for Arabic, English, and Kurdish Support -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="dark-theme">
+
+    <!-- 1. Language Splash Screen -->
+    <div id="splash-screen" class="splash-screen">
+        <div class="splash-content">
+            <div class="logo-container">
+                <div class="glow-effect"></div>
+                <h1 class="brand-logo">KITCHEN<span>STUDIO</span></h1>
+            </div>
+            <p class="splash-subtitle">Select your language / اختر لغتك / زمانت ھەڵبژێرە</p>
+            <div class="lang-buttons">
+                <button onclick="selectLanguage('ar')" class="btn-lang">العربية</button>
+                <button onclick="selectLanguage('en')" class="btn-lang">English</button>
+                <button onclick="selectLanguage('ku')" class="btn-lang">كوردی</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Main Website Container (Hidden initially) -->
+    <div id="main-content" class="main-content hidden">
+        
+        <!-- Header / Navigation Bar -->
+        <header>
+            <div class="header-container">
+                <div class="logo">KITCHEN<span>STUDIO</span></div>
+                <nav>
+                    <ul id="nav-links">
+                        <!-- Dynamic Links based on language -->
+                    </ul>
+                </nav>
+                <button class="btn-consultation" id="btn-consult-nav" onclick="scrollToBooking()">طلب استشارة</button>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-overlay"></div>
+            <div class="hero-container">
+                <h2 id="hero-title">نصنع من مطبخك لوحة فنية تجمع الفخامة والرفاهية</h2>
+                <p id="hero-desc">تصاميم مطابخ مودرن وكلاسيك ميكانيكية متطورة ومصنعة بأجود الخامات العالمية مع ضمان حقيقي.</p>
+                <div class="hero-actions">
+                    <button class="btn-primary" onclick="scrollToBooking()" id="hero-cta">ابدأ تصميم مطبخك الآن</button>
+                    <a href="#portfolio" class="btn-secondary" id="hero-secondary">مشاهدة أعمالنا</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="portfolio-section">
+            <div class="section-header">
+                <h3 id="portfolio-title">أحدث مشاريعنا</h3>
+                <div class="accent-line"></div>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="item-img-placeholder" style="background: linear-gradient(135deg, #2a2a2a, #1a1a1a);">
+                        <div class="kitchen-glow"></div>
+                        <span class="tag">Modern Black</span>
+                    </div>
+                    <div class="item-info">
+                        <h4>مطبخ مودرن أسود مطفأ</h4>
+                        <p>إضاءة ليد مخفية - خامات أكريليك مقاومة للرطوبة</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="item-img-placeholder" style="background: linear-gradient(135deg, #222, #111);">
+                        <div class="kitchen-glow"></div>
+                        <span class="tag">Classic Oak</span>
+                    </div>
+                    <div class="item-info">
+                        <h4>مطبخ كلاسيك خشب بلوط</h4>
+                        <p>لمسات ذهبية فاخرة مع رخام طبيعي كوارتز</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="item-img-placeholder" style="background: linear-gradient(135deg, #2d2d2d, #1f1f1f);">
+                        <div class="kitchen-glow"></div>
+                        <span class="tag">Minimalist Gray</span>
+                    </div>
+                    <div class="item-info">
+                        <h4>مطبخ رمادي فحمي ذكي</h4>
+                        <p>أنظمة هيدروليكية بالكامل واستغلال ذكي للمساحات</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Booking / Consultation Section -->
+        <section id="booking" class="booking-section">
+            <div class="booking-container">
+                <div class="booking-info">
+                    <h3 id="booking-title">احجز استشارتك المجانية</h3>
+                    <p id="booking-desc">املأ الاستمارة وسيقوم مهندسونا بالتواصل معك لزيارة الموقع وأخذ القياسات مجاناً وتزويدك بتصميم 3D مبدئي.</p>
+                </div>
+                <div class="booking-form-box">
+                    <form id="consultation-form" onsubmit="handleFormSubmit(event)">
+                        <div class="form-group">
+                            <label for="name" id="lbl-name">الاسم الكامل</label>
+                            <input type="text" id="name" required placeholder="مثال: أحمد علي">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone" id="lbl-phone">رقم الهاتف</label>
+                            <input type="tel" id="phone" required placeholder="07XXXXXXXX">
+                        </div>
+                        <div class="form-group">
+                            <label for="style" id="lbl-style">الستايل المفضل</label>
+                            <select id="style">
+                                <option value="modern">مودرن / عصري</option>
+                                <option value="classic">كلاسيك / فخم</option>
+                                <option value="smart">مطبخ ذكي ومدمج</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn-submit" id="btn-submit-text">إرسال الطلب وحجز موعد</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2026 KITCHENSTUDIO. جميع الحقوق محفوظة.</p>
+        </footer>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
