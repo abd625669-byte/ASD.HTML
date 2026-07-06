@@ -4,11 +4,447 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luxury Kitchens | تصميم مطابخ فاخرة</title>
-    <link rel="stylesheet" href="style.css">
     <!-- Google Fonts for Arabic, English, and Kurdish Support -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS RESET & BASE STYLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', 'Poppins', sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        :root {
+            --bg-dark: #181818;
+            --bg-deep: #0f0f0f;
+            --accent-orange: #ff6b00;
+            --accent-gold: #ffcc00;
+            --text-light: #f5f5f5;
+            --text-muted: #aaaaaa;
+            --border-color: #2a2a2a;
+        }
+
+        /* 1. SPLASH SCREEN */
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: var(--bg-deep);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .splash-content {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .logo-container {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .brand-logo {
+            font-size: 32pt;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--text-light);
+        }
+
+        .brand-logo span {
+            color: var(--accent-orange);
+            text-shadow: 0 0 15px rgba(255, 107, 0, 0.6);
+        }
+
+        .glow-effect {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(255, 204, 0, 0.15) 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        .splash-subtitle {
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            font-size: 12pt;
+        }
+
+        .lang-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .btn-lang {
+            background-color: var(--bg-dark);
+            border: 1px solid var(--border-color);
+            color: var(--text-light);
+            padding: 12px 30px;
+            font-size: 11pt;
+            font-family: inherit;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-lang:hover {
+            border-color: var(--accent-orange);
+            box-shadow: 0 0 10px rgba(255, 107, 0, 0.3);
+            color: var(--accent-orange);
+            transform: translateY(-2px);
+        }
+
+        /* 2. MAIN CONTENT & HEADER */
+        header {
+            background-color: rgba(24, 24, 24, 0.95);
+            border-bottom: 1px solid var(--border-color);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 18pt;
+            font-weight: 700;
+            color: var(--text-light);
+        }
+
+        .logo span {
+            color: var(--accent-orange);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 11pt;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-gold);
+        }
+
+        .btn-consultation {
+            background: transparent;
+            border: 2px solid var(--accent-orange);
+            color: var(--text-light);
+            padding: 8px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-consultation:hover {
+            background-color: var(--accent-orange);
+            box-shadow: 0 0 15px rgba(255, 107, 0, 0.4);
+        }
+
+        /* 3. HERO SECTION */
+        .hero-section {
+            position: relative;
+            height: 85vh;
+            margin-top: 70px;
+            background: #1a1a1a;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 80% 20%, rgba(255, 204, 0, 0.05), transparent 50%),
+                        linear-gradient(to right, rgba(15, 15, 15, 0.95), rgba(15, 15, 15, 0.6));
+            z-index: 1;
+        }
+
+        .hero-container {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+        }
+
+        .hero-section h2 {
+            font-size: 26pt;
+            font-weight: 700;
+            line-height: 1.4;
+            margin-bottom: 20px;
+            color: var(--text-light);
+        }
+
+        .hero-section p {
+            font-size: 12pt;
+            color: var(--text-muted);
+            margin-bottom: 35px;
+            line-height: 1.6;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-orange);
+            border: none;
+            color: var(--text-light);
+            padding: 14px 35px;
+            font-size: 11pt;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #e05e00;
+            box-shadow: 0 0 20px rgba(255, 107, 0, 0.5);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-light);
+            padding: 14px 35px;
+            font-size: 11pt;
+            text-decoration: none;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--text-muted);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        /* 4. PORTFOLIO SECTION */
+        .portfolio-section {
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 0 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h3 {
+            font-size: 20pt;
+            margin-bottom: 10px;
+        }
+
+        .accent-line {
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-orange);
+            margin: 0 auto;
+        }
+
+        .portfolio-grid {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .portfolio-item {
+            flex: 1;
+            background-color: var(--bg-dark);
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .item-img-placeholder {
+            height: 240px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .kitchen-glow {
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(255, 204, 0, 0.1) 0%, transparent 70%);
+        }
+
+        .tag {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: rgba(15, 15, 15, 0.8);
+            padding: 5px 12px;
+            font-size: 9pt;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 107, 0, 0.4);
+        }
+
+        .item-info {
+            padding: 20px;
+        }
+
+        .item-info h4 {
+            font-size: 13pt;
+            margin-bottom: 8px;
+            color: var(--text-light);
+        }
+
+        .item-info p {
+            font-size: 10pt;
+            color: var(--text-muted);
+        }
+
+        /* 5. BOOKING SECTION */
+        .booking-section {
+            background-color: var(--bg-deep);
+            border-top: 1px solid var(--border-color);
+            padding: 80px 0;
+        }
+
+        .booking-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .booking-info, .booking-form-box {
+            flex: 1;
+        }
+
+        .booking-info h3 {
+            font-size: 22pt;
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+
+        .booking-info p {
+            font-size: 11pt;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .booking-form-box {
+            background-color: var(--bg-dark);
+            padding: 35px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 10pt;
+            color: var(--text-light);
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--bg-deep);
+            border: 1px solid var(--border-color);
+            color: var(--text-light);
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 10pt;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--accent-orange);
+        }
+
+        .btn-submit {
+            width: 100%;
+            background-color: var(--accent-orange);
+            color: var(--text-light);
+            border: none;
+            padding: 14px;
+            font-size: 11pt;
+            font-weight: 600;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: #e05e00;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background-color: var(--bg-deep);
+            border-top: 1px solid var(--border-color);
+            font-size: 10pt;
+            color: var(--text-muted);
+        }
+
+        /* RTL & LTR Layout handling */
+        body.rtl { direction: rtl; }
+        body.ltr { direction: ltr; }
+        
+        body.rtl .header-container, body.rtl .booking-container { flex-direction: row; }
+        body.ltr .header-container, body.ltr .booking-container { flex-direction: row; }
+        
+        @media (max-width: 768px) {
+            .portfolio-grid, .booking-container { flex-direction: column !important; }
+            .header-container { flex-direction: column !important; gap: 15px; }
+        }
+    </style>
 </head>
 <body class="dark-theme">
 
@@ -36,9 +472,7 @@
             <div class="header-container">
                 <div class="logo">KITCHEN<span>STUDIO</span></div>
                 <nav>
-                    <ul id="nav-links">
-                        <!-- Dynamic Links based on language -->
-                    </ul>
+                    <ul id="nav-links"></ul>
                 </nav>
                 <button class="btn-consultation" id="btn-consult-nav" onclick="scrollToBooking()">طلب استشارة</button>
             </div>
@@ -70,8 +504,8 @@
                         <span class="tag">Modern Black</span>
                     </div>
                     <div class="item-info">
-                        <h4>مطبخ مودرن أسود مطفأ</h4>
-                        <p>إضاءة ليد مخفية - خامات أكريليك مقاومة للرطوبة</p>
+                        <h4 id="p1-title">مطبخ مودرن أسود مطفأ</h4>
+                        <p id="p1-desc">إضاءة ليد مخفية - خامات أكريليك مقاومة للرطوبة</p>
                     </div>
                 </div>
                 <div class="portfolio-item">
@@ -80,8 +514,8 @@
                         <span class="tag">Classic Oak</span>
                     </div>
                     <div class="item-info">
-                        <h4>مطبخ كلاسيك خشب بلوط</h4>
-                        <p>لمسات ذهبية فاخرة مع رخام طبيعي كوارتز</p>
+                        <h4 id="p2-title">مطبخ كلاسيك خشب بلوط</h4>
+                        <p id="p2-desc">لمسات ذهبية فاخرة مع رخام طبيعي كوارتز</p>
                     </div>
                 </div>
                 <div class="portfolio-item">
@@ -90,8 +524,8 @@
                         <span class="tag">Minimalist Gray</span>
                     </div>
                     <div class="item-info">
-                        <h4>مطبخ رمادي فحمي ذكي</h4>
-                        <p>أنظمة هيدروليكية بالكامل واستغلال ذكي للمساحات</p>
+                        <h4 id="p3-title">مطبخ رمادي فحمي ذكي</h4>
+                        <p id="p3-desc">أنظمة هيدروليكية بالكامل واستغلال ذكي للمساحات</p>
                     </div>
                 </div>
             </div>
@@ -108,7 +542,7 @@
                     <form id="consultation-form" onsubmit="handleFormSubmit(event)">
                         <div class="form-group">
                             <label for="name" id="lbl-name">الاسم الكامل</label>
-                            <input type="text" id="name" required placeholder="مثال: أحمد علي">
+                            <input type="text" id="name" required placeholder="...">
                         </div>
                         <div class="form-group">
                             <label for="phone" id="lbl-phone">رقم الهاتف</label>
@@ -117,24 +551,136 @@
                         <div class="form-group">
                             <label for="style" id="lbl-style">الستايل المفضل</label>
                             <select id="style">
-                                <option value="modern">مودرن / عصري</option>
-                                <option value="classic">كلاسيك / فخم</option>
-                                <option value="smart">مطبخ ذكي ومدمج</option>
+                                <option value="modern">Modern / مودرن</option>
+                                <option value="classic">Classic / كلاسيك</option>
                             </select>
                         </div>
-                        <button type="submit" class="btn-submit" id="btn-submit-text">إرسال الطلب وحجز موعد</button>
+                        <button type="submit" class="btn-submit" id="btn-submit-text">حجز الموعد</button>
                     </form>
                 </div>
             </div>
         </section>
 
-        <!-- Footer -->
         <footer>
-            <p>&copy; 2026 KITCHENSTUDIO. جميع الحقوق محفوظة.</p>
+            <p>&copy; 2026 KITCHENSTUDIO. All Rights Reserved.</p>
         </footer>
 
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        const translations = {
+            ar: {
+                dir: 'rtl',
+                nav: ['الرئيسية', 'مشاريعنا', 'اتصل بنا'],
+                btnConsultNav: 'طلب استشارة',
+                heroTitle: 'نصنع من مطبخك لوحة فنية تجمع الفخامة والرفاهية',
+                heroDesc: 'تصاميم مطابخ مودرن وكلاسيك ميكانيكية متطورة ومصنعة بأجود الخامات العالمية مع ضمان حقيقي.',
+                heroCta: 'ابدأ تصميم مطبخك الآن',
+                heroSecondary: 'مشاهدة أعمالنا',
+                portfolioTitle: 'أحدث مشاريعنا',
+                bookingTitle: 'احجز استشارتك المجانية',
+                bookingDesc: 'املأ الاستمارة وسيقوم مهندسونا بالتواصل معك لزيارة الموقع وأخذ القياسات مجاناً.',
+                lblName: 'الاسم الكامل',
+                lblPhone: 'رقم الهاتف',
+                lblStyle: 'الستايل المفضل',
+                btnSubmit: 'إرسال الطلب وحجز موعد',
+                successMsg: 'شكراً لتواصلك معنا! سيقوم مهندسونا بالاتصال بك قريباً.',
+                p1T: 'مطبخ مودرن أسود مطفأ', p1D: 'إضاءة ليد مخفية وخامات أكريليك فاخرة',
+                p2T: 'مطبخ كلاسيك خشب بلوط', p2D: 'لمسات ذهبية فاخرة مع رخام طبيعي',
+                p3T: 'مطبخ رمادي فحمي ذكي', p3D: 'أنظمة هيدروليكية بالكامل واستغلال ذكي'
+            },
+            en: {
+                dir: 'ltr',
+                nav: ['Home', 'Projects', 'Contact Us'],
+                btnConsultNav: 'Request Consultation',
+                heroTitle: 'We craft your kitchen into a masterpiece of luxury',
+                heroDesc: 'Advanced modern and classic mechanical kitchen designs, made with the finest global materials.',
+                heroCta: 'Start Your Design Now',
+                heroSecondary: 'View Our Work',
+                portfolioTitle: 'Our Latest Projects',
+                bookingTitle: 'Book Your Free Consultation',
+                bookingDesc: 'Fill out the form and our engineers will contact you to take measurements for free.',
+                lblName: 'Full Name',
+                lblPhone: 'Phone Number',
+                lblStyle: 'Preferred Style',
+                btnSubmit: 'Submit Request',
+                successMsg: 'Thank you! Our engineers will call you soon.',
+                p1T: 'Modern Matte Black', p1D: 'Hidden LED lighting & luxury acrylic surfaces',
+                p2T: 'Classic Royal Oak', p2D: 'Elegant gold touches with premium marble',
+                p3T: 'Smart Charcoal Gray', p3D: 'Fully hydraulic systems with smart spacing'
+            },
+            ku: {
+                dir: 'rtl',
+                nav: ['سەرەکی', 'پڕۆژەکانمان', 'پەیوەندی'],
+                btnConsultNav: 'داواکردنی ڕاوێژکاری',
+                heroTitle: 'چێشتخانەکەت دەکەینە شاکارێکی ناوازە لە مۆدێرن و فخامەت',
+                heroDesc: 'دیزاینی پێشکەوتووی چێشتخانەی مۆدێرن و کلاسیک بە باشترین کەرەستەی جیهانی.',
+                heroCta: 'ئێستا دەست بە دیزاین بکە',
+                heroSecondary: 'بینینی کارەکانمان',
+                portfolioTitle: 'نوێترین پڕۆژەکانمان',
+                bookingTitle: 'ڕاوێژکاری بێبەرامبەر بگرە',
+                bookingDesc: 'فۆرمەکە پڕبکەرەوە و ئەندازیارانمان پەیوەندیت پێوە دەکەن بۆ گرتنی پێوانەکان بەخۆڕایی.',
+                lblName: 'ناوی تەواو',
+                lblPhone: 'ژمارەی مۆبایل',
+                lblStyle: 'ستایلی دڵخواز',
+                btnSubmit: 'ناردنی داواکاری',
+                successMsg: 'سپاس بۆ پەیوەندیکردنتان! ئەندازیارانمان بەم زووانە پەیوەندیتان پێوە دەکەن.',
+                p1T: 'چێشتخانەی ڕەشی مۆدێرن', p1D: 'ڕووناکی لیدی شاراوە و ڕووی ئەکادیمی شاهانە',
+                p2T: 'دار بەڕووی کلاسیک', p2D: 'دەستکاری ئاڵتونی نایاب لەگەڵ مڕمڕی سروشتی',
+                p3T: 'خۆڵەمێشی زیرەک', p3D: 'سیستمی هایدرۆلیکی تەواو لەگەڵ بەکارهێنانی زیرەکی بۆشایی'
+            }
+        };
+
+        function selectLanguage(lang) {
+            const data = translations[lang];
+            
+            // Set direction on body and main wrapper
+            document.body.className = data.dir;
+            document.getElementById('main-content').className = `main-content ${data.dir}`;
+            
+            // Update Text Content
+            document.getElementById('btn-consult-nav').innerText = data.btnConsultNav;
+            document.getElementById('hero-title').innerText = data.heroTitle;
+            document.getElementById('hero-desc').innerText = data.heroDesc;
+            document.getElementById('hero-cta').innerText = data.heroCta;
+            document.getElementById('hero-secondary').innerText = data.heroSecondary;
+            document.getElementById('portfolio-title').innerText = data.portfolioTitle;
+            document.getElementById('booking-title').innerText = data.bookingTitle;
+            document.getElementById('booking-desc').innerText = data.bookingDesc;
+            
+            document.getElementById('lbl-name').innerText = data.lblName;
+            document.getElementById('lbl-phone').innerText = data.lblPhone;
+            document.getElementById('lbl-style').innerText = data.lblStyle;
+            document.getElementById('btn-submit-text').innerText = data.btnSubmit;
+
+            document.getElementById('p1-title').innerText = data.p1T; document.getElementById('p1-desc').innerText = data.p1D;
+            document.getElementById('p2-title').innerText = data.p2T; document.getElementById('p2-desc').innerText = data.p2D;
+            document.getElementById('p3-title').innerText = data.p3T; document.getElementById('p3-desc').innerText = data.p3D;
+            
+            // Rebuild Navigation
+            const navUl = document.getElementById('nav-links');
+            navUl.innerHTML = '';
+            const sections = ['#main-content', '#portfolio', '#booking'];
+            data.nav.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `<a href="${sections[index]}">${item}</a>`;
+                navUl.appendChild(li);
+            });
+
+            // Switch Screen visibility
+            document.getElementById('splash-screen').classList.add('hidden');
+            document.getElementById('main-content').classList.remove('hidden');
+        }
+
+        function scrollToBooking() {
+            document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            alert("تم إرسال طلبك بنجاح!");
+            document.getElementById('consultation-form').reset();
+        }
+    </script>
 </body>
 </html>
