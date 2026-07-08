@@ -1,428 +1,544 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>L'Océan Perle | لؤلؤة المحيط - منيو إلكتروني فاخر</title>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome for Premium Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Main Style Sheet -->
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Le Bistrot Céleste - القائمة الإلكترونية الفاخرة لأرقى الأطباق الفرنسية الكلاسيكية والمشروبات المحضرة بحرفية">
+  <title>Le Bistrot Céleste | القائمة الإلكترونية الفاخرة</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body class="dark-theme">
+<body>
 
-    <!-- 1. Screen Loader -->
-    <div id="screen-loader" class="loader-container">
-        <div class="luxury-loader">
-            <div class="loader-ring"></div>
-            <div class="loader-logo">
-                <i class="fa-solid fa-anchor gold-text animate-pulse"></i>
-            </div>
-            <span class="loader-text gold-text" data-tr="loading">جاري تحميل التجربة الملكية...</span>
-        </div>
-    </div>
-
-    <!-- 2. Landing/Welcome Screen -->
-    <div id="welcome-screen" class="welcome-overlay">
-        <div class="welcome-bg" style="background-image: url('assets/hero_background.png');"></div>
-        <div class="welcome-content">
-            <div class="restaurant-logo-large">
-                <i class="fa-solid fa-anchor gold-text"></i>
-                <div class="logo-text">L'Océan Perle</div>
-                <div class="logo-subtext" data-tr="restaurant-sub">مطعم المأكولات البحرية الفاخر</div>
-            </div>
-            
-            <h1 class="welcome-title">
-                <span class="gold-text" data-tr="welcome-title-1">أهلاً بك في عالم</span><br>
-                <span class="pearl-text" data-tr="welcome-title-2">الفخامة البحرية</span>
-            </h1>
-            
-            <p class="welcome-desc" data-tr="welcome-desc-text">
-                حيث تلتقي عراقة المحيط باللمسات الذهبية الفاخرة لتجربة تذوق تفوق الخيال.
-            </p>
-
-            <div class="table-badge-large">
-                <span data-tr="table-prefix">طاولة</span>
-                <span id="welcome-table-num" class="gold-text">07</span>
-            </div>
-
-            <!-- Language Selection -->
-            <div class="lang-selector-landing">
-                <button class="btn-lang active" onclick="setLanguage('ar')">العربية</button>
-                <button class="btn-lang" onclick="setLanguage('en')">English</button>
-            </div>
-
-            <button class="btn-primary-luxury" id="btn-enter" onclick="enterMenu()">
-                <span data-tr="btn-enter-text">اكتشف القائمة الفاخرة</span>
-                <i class="fa-solid fa-chevron-left arrow-icon"></i>
-            </button>
-        </div>
-    </div>
-
-    <!-- 3. Main Application Dashboard -->
-    <div id="main-app" class="hidden">
-        <!-- Floating Action Button for Waiter Service -->
-        <button class="btn-waiter-float" onclick="openWaiterModal()">
-            <i class="fa-solid fa-bell"></i>
-            <span class="btn-waiter-text" data-tr="call-waiter-btn">طلب خدمة</span>
+  <!-- ========================================== -->
+  <!-- 1. شاشة الترحيب واختيار اللغة (SPLASH SCREEN) -->
+  <!-- ========================================== -->
+  <div id="splash-screen">
+    <div class="splash-content">
+      <!-- شعار فرنسي فاخر بالـ SVG -->
+      <svg class="splash-logo-icon" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="45" fill="none" stroke="var(--color-gold)" stroke-width="1.5" stroke-dasharray="3 3"/>
+        <circle cx="50" cy="50" r="40" fill="none" stroke="var(--color-gold)" stroke-width="0.75"/>
+        <path d="M50 20 L50 80 M20 50 L80 50" stroke="var(--color-gold)" stroke-width="0.5" opacity="0.3"/>
+        <!-- رمز برج إيفل مبسط أو زهرة الكأس الذهبية -->
+        <path d="M42 70 L48 35 Q50 30 52 35 L58 70 Z" fill="none" stroke="var(--color-gold)" stroke-width="1.5"/>
+        <path d="M45 55 L55 55 M47 45 L53 45" stroke="var(--color-gold)" stroke-width="1"/>
+        <path d="M38 72 Q50 78 62 72" fill="none" stroke="var(--color-gold)" stroke-width="1.5"/>
+        <circle cx="50" cy="27" r="3" fill="var(--color-gold)"/>
+      </svg>
+      <h1 class="splash-title">Le Bistrot Céleste</h1>
+      <p class="splash-subtitle">Menu Numérique • المنيو الإلكتروني</p>
+      <div class="splash-divider"></div>
+      <p class="splash-welcome-msg">اختر لغتك المفضلة لبدء تجربة الطهي الفرنسية الفاخرة</p>
+      <p class="splash-welcome-msg-en">Choose your language to begin the premium French culinary experience</p>
+      
+      <div class="lang-grid">
+        <button class="lang-btn" data-lang="ar" id="btn-lang-ar">
+          <span class="lang-name">العربية</span>
+          <span class="lang-native">القائمة بالعربية</span>
         </button>
+        <button class="lang-btn" data-lang="en" id="btn-lang-en">
+          <span class="lang-name">English</span>
+          <span class="lang-native">Menu in English</span>
+        </button>
+      </div>
+    </div>
+  </div>
 
-        <!-- Elegant Header -->
-        <header class="app-header">
-            <div class="header-top">
-                <div class="logo-container" onclick="resetToHome()">
-                    <i class="fa-solid fa-anchor gold-text"></i>
-                    <div class="logo-details">
-                        <span class="logo-main">L'Océan Perle</span>
-                        <span class="logo-tag" data-tr="restaurant-tag">لؤلؤة المحيط</span>
-                    </div>
-                </div>
-                
-                <div class="header-actions">
-                    <!-- Language Selector -->
-                    <button class="icon-btn-luxury" id="lang-switch-btn" onclick="toggleLanguage()" title="Switch Language">
-                        <i class="fa-solid fa-globe"></i>
-                        <span class="btn-text">EN</span>
-                    </button>
-                    
-                    <!-- Table Badge -->
-                    <div class="header-table-badge">
-                        <span class="badge-lbl" data-tr="table">طاولة</span>
-                        <span class="badge-num" id="header-table-num">07</span>
-                    </div>
+  <!-- ========================================== -->
+  <!-- 2. الموقع الرئيسي بعد اختيار اللغة         -->
+  <!-- ========================================== -->
+  <div id="main-site">
 
-                    <!-- Cart Toggle Button -->
-                    <button class="cart-btn-luxury" onclick="toggleCart()">
-                        <i class="fa-solid fa-receipt"></i>
-                        <span class="cart-badge hidden" id="cart-counter">0</span>
-                    </button>
-                </div>
-            </div>
+    <!-- شريط التنقل العلوي (NAVBAR) -->
+    <header class="navbar" id="site-header">
+      <div class="container nav-container">
+        
+        <!-- شعار المطعم -->
+        <a href="#" class="logo" id="nav-logo">
+          <svg class="logo-icon" viewBox="0 0 100 100" style="width: 2.5rem; height: 2.5rem;">
+            <circle cx="50" cy="50" r="45" fill="none" stroke="var(--color-gold)" stroke-width="2"/>
+            <path d="M42 70 L48 35 Q50 30 52 35 L58 70 Z" fill="none" stroke="var(--color-gold)" stroke-width="2"/>
+            <path d="M45 55 L55 55 M47 45 L53 45" stroke="var(--color-gold)" stroke-width="1.5"/>
+            <circle cx="50" cy="27" r="3" fill="var(--color-gold)"/>
+          </svg>
+          <div class="logo-text-wrapper">
+            <span class="logo-main">Le Bistrot Céleste</span>
+            <span class="logo-sub" data-i18n="logo_sub">Parisian Fine Dining</span>
+          </div>
+        </a>
 
-            <!-- Search and Filter Bar -->
-            <div class="header-search-container">
-                <div class="search-bar">
-                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                    <input type="text" id="search-input" data-tr-placeholder="search-placeholder" placeholder="ابحث عن طبقك البحري المفضل..." oninput="filterMenuItems()">
-                </div>
-            </div>
-        </header>
-
-        <!-- Interactive Category Slider -->
-        <nav class="category-nav">
-            <div class="category-scroll-container" id="category-list">
-                <!-- Dynamically Populated by JS -->
-            </div>
+        <!-- الروابط السريعة للتصنيفات (على أجهزة الكمبيوتر) -->
+        <nav class="nav-menu" id="nav-menu">
+          <a href="#menu-section" class="nav-link" data-category-link="all" data-i18n="nav_menu">المنيو الكامل</a>
+          <a href="#menu-section" class="nav-link" data-category-link="entrées" data-i18n="nav_entrées">المقبلات</a>
+          <a href="#menu-section" class="nav-link" data-category-link="plats" data-i18n="nav_plats">الأطباق الرئيسية</a>
+          <a href="#menu-section" class="nav-link" data-category-link="desserts" data-i18n="nav_desserts">الحلويات</a>
+          <a href="#menu-section" class="nav-link" data-category-link="boissons" data-i18n="nav_boissons">المشروبات</a>
         </nav>
 
-        <!-- Dietary Filters Panel -->
-        <section class="dietary-filters">
-            <div class="filters-scroll">
-                <button class="filter-pill active" onclick="setDietaryFilter('all')" id="filter-all">
-                    <i class="fa-solid fa-utensils"></i>
-                    <span data-tr="filter-all">الكل</span>
-                </button>
-                <button class="filter-pill" onclick="setDietaryFilter('spicy')" id="filter-spicy">
-                    <i class="fa-solid fa-pepper-hot text-spicy"></i>
-                    <span data-tr="filter-spicy">حار</span>
-                </button>
-                <button class="filter-pill" onclick="setDietaryFilter('gluten-free')" id="filter-gluten">
-                    <i class="fa-solid fa-wheat-shear text-gluten"></i>
-                    <span data-tr="filter-gluten">خالي من الجلوتين</span>
-                </button>
-                <button class="filter-pill" onclick="setDietaryFilter('signature')" id="filter-signature">
-                    <i class="fa-solid fa-crown text-signature"></i>
-                    <span data-tr="filter-signature">أطباق توقيعية</span>
-                </button>
-                <button class="filter-pill" onclick="setDietaryFilter('nuts-free')" id="filter-nuts">
-                    <i class="fa-solid fa-seedling text-nuts"></i>
-                    <span data-tr="filter-nuts">خالي من المكسرات</span>
-                </button>
+        <!-- أدوات التحكم (اللغة، مناداة النادل، السلة) -->
+        <div class="nav-actions">
+          
+          <!-- مبدل اللغة -->
+          <div class="lang-selector">
+            <button class="lang-selector-btn" id="lang-menu-btn" aria-label="Language Switcher">
+              <svg style="width:1.2rem; height:1.2rem; fill:none; stroke:currentColor; stroke-width:2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 002 2h2m.905-3.07a9 9 0 11-12.01 0" />
+              </svg>
+              <span id="current-lang-label">العربية</span>
+            </button>
+            <div class="lang-dropdown" id="lang-dropdown-menu">
+              <span class="lang-option" data-lang="ar">العربية</span>
+              <span class="lang-option" data-lang="en">English</span>
             </div>
-        </section>
+          </div>
 
-        <!-- Menu Content Grid -->
-        <main class="menu-main-content">
-            <div class="section-title-container">
-                <h2 class="category-heading" id="current-category-name">روائع الشيف التوقيعية</h2>
-                <p class="category-subheading" id="current-category-desc">أطباق بحرية مبتكرة من إعداد شيف المطعم الحائز على جوائز عالمية.</p>
+          <!-- زر مناداة النادل -->
+          <button class="btn-waiter" id="btn-call-waiter" data-i18n="btn_call_waiter_title" title="استدعاء النادل لخدمتك">
+            <svg class="waiter-bell-icon" viewBox="0 0 24 24">
+              <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z" fill="currentColor"/>
+            </svg>
+            <span class="waiter-text" data-i18n="btn_call_waiter">نداء النادل</span>
+          </button>
+
+          <!-- زر السلة التفاعلي مع العداد -->
+          <button class="cart-trigger" id="cart-trigger-btn" aria-label="Open Shopping Cart">
+            <svg class="cart-icon" viewBox="0 0 24 24">
+              <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z" fill="currentColor"/>
+            </svg>
+            <span class="cart-count" id="cart-counter">0</span>
+          </button>
+
+        </div>
+      </div>
+    </header>
+
+    <!-- قسم البانر الرئيسي (HERO SECTION) -->
+    <section class="hero" id="hero">
+      <div class="hero-overlay"></div>
+      <div class="container hero-container">
+        <div class="hero-content">
+          <span class="hero-tagline" data-i18n="hero_tagline">Une Expérience Unique</span>
+          <h2 class="hero-title" data-i18n="hero_title">رحلة في قلب المطبخ الفرنسي العريق</h2>
+          <p class="hero-desc" data-i18n="hero_desc">استمتع بتشكيلة ساحرة من المقبلات والأطباق الباريسية الكلاسيكية، المحضرة بحب وعناية فائقة بواسطة أفضل الطهاة، وبمكونات طازجة مستوردة خصيصاً لك.</p>
+          
+          <!-- شريط البحث الفوري داخل المنيو -->
+          <div class="search-container">
+            <div class="search-box">
+              <svg class="search-icon" viewBox="0 0 24 24">
+                <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" fill="currentColor"/>
+              </svg>
+              <input type="text" id="menu-search-input" placeholder="ابحث عن طبقك الفرنسي المفضل..." data-i18n-placeholder="search_placeholder">
+              <button id="clear-search-btn" class="clear-search-btn" aria-label="Clear search">×</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- قسم المنيو الرئيسي (MENU SECTION) -->
+    <section class="menu-section" id="menu-section">
+      <div class="container">
+        
+        <!-- شريط التبويبات الفاخر للتصنيفات (Sticky Category Bar) -->
+        <div class="category-tabs-container">
+          <div class="category-tabs" id="category-tabs-row">
+            <button class="tab-btn active" data-category="all">
+              <span class="tab-icon">✨</span>
+              <span class="tab-label" data-i18n="cat_all">الكل</span>
+            </button>
+            <button class="tab-btn" data-category="entrées">
+              <span class="tab-icon">🍲</span>
+              <span class="tab-label" data-i18n="cat_entrées">المقبلات (Entrées)</span>
+            </button>
+            <button class="tab-btn" data-category="plats">
+              <span class="tab-icon">🥩</span>
+              <span class="tab-label" data-i18n="cat_plats">الأطباق الرئيسية (Plats)</span>
+            </button>
+            <button class="tab-btn" data-category="desserts">
+              <span class="tab-icon">🍰</span>
+              <span class="tab-label" data-i18n="cat_desserts">الحلويات (Desserts)</span>
+            </button>
+            <button class="tab-btn" data-category="boissons">
+              <span class="tab-icon">☕</span>
+              <span class="tab-label" data-i18n="cat_boissons">المشروبات (Boissons)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- فلاتر التفضيلات الغذائية (DIETARY FILTERS) -->
+        <div class="dietary-filters">
+          <span class="filter-title" data-i18n="filter_title">خيارات التصفية:</span>
+          <div class="filter-chips">
+            <button class="chip" data-filter="vegan">
+              <span class="chip-dot vegan"></span>
+              <span data-i18n="filter_vegan">نباتي (V)</span>
+            </button>
+            <button class="chip" data-filter="gf">
+              <span class="chip-dot gf"></span>
+              <span data-i18n="filter_gf">خالٍ من الغلوتين (GF)</span>
+            </button>
+            <button class="chip" data-filter="nuts">
+              <span class="chip-dot nuts"></span>
+              <span data-i18n="filter_nuts">يحتوي مكسرات (N)</span>
+            </button>
+            <button class="chip" data-filter="chef">
+              <span class="chip-dot chef"></span>
+              <span data-i18n="filter_chef">توصية الطاهي (⭐)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- حالة عدم العثور على أطباق (NO RESULTS FOUND) -->
+        <div id="no-results-msg" class="no-results-card" style="display: none;">
+          <svg viewBox="0 0 24 24" class="no-results-icon">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" fill="currentColor"/>
+          </svg>
+          <h3 data-i18n="no_results_title">لم نجد أي طبق يطابق خيارات البحث</h3>
+          <p data-i18n="no_results_desc">يرجى تجربة كلمات بحث أخرى أو إلغاء تحديد بعض الفلاتر الغذائية.</p>
+          <button class="btn btn-secondary" id="btn-reset-filters" data-i18n="reset_filters_btn">إعادة تعيين القائمة</button>
+        </div>
+
+        <!-- شبكة عرض الأطباق الديناميكية (DISHES GRID) -->
+        <div class="dishes-grid" id="dishes-grid-container">
+          <!-- سيتم تعبئة الأطباق ديناميكياً بواسطة JavaScript -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- تفاصيل قصة التميز الباريسي (OUR HERITAGE / BRAND PROMISE) -->
+    <section class="heritage-section">
+      <div class="container">
+        <div class="heritage-grid">
+          <div class="heritage-text">
+            <span class="heritage-tag" data-i18n="heritage_tag">التميز والجودة الفرنسية</span>
+            <h3 class="heritage-title" data-i18n="heritage_title">تقاليد الطهي الفرنسية العريقة في قلب مدينتكم</h3>
+            <p class="heritage-desc" data-i18n="heritage_desc">كل تفصيل في مطبخنا يعكس ثقافة الطهي الفرنسية التي تم إدراجها ضمن التراث الثقافي غير المادي لمنظمة اليونسكو. نحن نلتزم باستخدام الزبدة الفرنسية الفاخرة، والأعشاب البرية الطازجة من مقاطعة بروفانس، واللحوم المنتقاة بعناية لنقدم لك وجبة لا تُنسى تعيدك إلى شوارع باريس الدافئة.</p>
+            <div class="heritage-features">
+              <div class="h-feat-item">
+                <span class="h-feat-icon">🥖</span>
+                <div class="h-feat-content">
+                  <h4 data-i18n="feat1_title">مخبوزات طازجة يومياً</h4>
+                  <p data-i18n="feat1_desc">نخبز الكرواسون والباغيت الفرنسي الطازج في أفراننا كل صباح مع الفجر.</p>
+                </div>
+              </div>
+              <div class="h-feat-item">
+                <span class="h-feat-icon">🧀</span>
+                <div class="h-feat-content">
+                  <h4 data-i18n="feat2_title">أجبان مستوردة فاخرة</h4>
+                  <p data-i18n="feat2_desc">نستورد تشكيلة من أجبان الـ Brie والـ Roquefort والـ Gruyère مباشرة من فرنسا.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="heritage-visual">
+            <div class="heritage-img-wrapper">
+              <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=800&auto=format&fit=crop&q=80" alt="معجنات وكرواسون فرنسي فاخر" class="heritage-img">
+            </div>
+            <div class="heritage-glow"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 3. نافذة تفاصيل الطبق المنبثقة (DETAIL MODAL) -->
+    <!-- ========================================== -->
+    <div class="modal-overlay" id="dish-detail-modal">
+      <div class="modal-card dish-modal-card">
+        <button class="close-modal-btn" id="close-detail-modal-btn" aria-label="Close modal">×</button>
+        
+        <div class="modal-flex-layout">
+          <!-- الصورة للطبق في المودال -->
+          <div class="modal-image-wrapper">
+            <img src="" alt="" id="modal-dish-img" class="modal-dish-img">
+            <div class="modal-diet-badges" id="modal-diet-badges"></div>
+          </div>
+          
+          <!-- المحتوى النصي والمعلومات والتخصيص -->
+          <div class="modal-info-wrapper">
+            <div class="modal-info-header">
+              <h3 class="modal-dish-title" id="modal-dish-title">اسم الطبق الفرنسي</h3>
+              <p class="modal-dish-subtitle" id="modal-dish-subtitle-fr">Nom du Plat en Français</p>
+              <div class="modal-price-row">
+                <span class="modal-dish-price" id="modal-dish-price">0.00 ر.س</span>
+                <span class="modal-dish-calories" id="modal-dish-calories">
+                  <svg style="width: 1rem; height: 1rem; fill: currentColor; margin-inline-end: 0.25rem;" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" fill="currentColor"/>
+                  </svg>
+                  <span id="modal-calories-value">0</span> <span data-i18n="kcal">سعرة</span>
+                </span>
+              </div>
+            </div>
+
+            <!-- الوصف والمكونات ومسببات الحساسية -->
+            <div class="modal-body-scroll">
+              <div class="modal-section">
+                <h4 data-i18n="modal_desc_title">الوصف الفني:</h4>
+                <p class="modal-dish-desc" id="modal-dish-desc">وصف تفصيلي للطبق ومذاقه الفريد.</p>
+              </div>
+
+              <div class="modal-section">
+                <h4 data-i18n="modal_ingredients_title">المكونات الأساسية:</h4>
+                <p class="modal-dish-ingredients" id="modal-dish-ingredients">زبدة، دقيق، بصل، جبنة غرويير.</p>
+              </div>
+
+              <!-- مسببات الحساسية -->
+              <div class="modal-section allergens-section" id="modal-allergens-section">
+                <h4 data-i18n="modal_allergens_title">مسببات الحساسية:</h4>
+                <div class="allergen-badges" id="modal-allergens-list">
+                  <!-- سيتم إضافتها برمجياً -->
+                </div>
+              </div>
+
+              <!-- خيارات التخصيص التفاعلية -->
+              <div class="modal-section customization-section">
+                <h4 data-i18n="modal_customization_title">خيارات التخصيص (اختياري):</h4>
+                
+                <!-- درجة الاستواء (خاصة باللحوم والستيك) -->
+                <div class="custom-group" id="steak-cooking-group" style="display: none;">
+                  <span class="custom-label" data-i18n="custom_steak_cook">درجة استواء اللحم:</span>
+                  <div class="custom-options-grid">
+                    <label class="custom-option-card">
+                      <input type="radio" name="steak-cook" value="Medium Rare" checked>
+                      <span class="opt-label" data-i18n="steak_mr">متوسط الاستواء خفيف (Medium Rare)</span>
+                    </label>
+                    <label class="custom-option-card">
+                      <input type="radio" name="steak-cook" value="Medium">
+                      <span class="opt-label" data-i18n="steak_m">متوسط الاستواء (Medium)</span>
+                    </label>
+                    <label class="custom-option-card">
+                      <input type="radio" name="steak-cook" value="Well Done">
+                      <span class="opt-label" data-i18n="steak_wd">كامل الاستواء (Well Done)</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- إضافات إضافية -->
+                <div class="custom-group">
+                  <span class="custom-label" data-i18n="custom_extras">إضافات وتفضيلات:</span>
+                  <div class="custom-checkboxes">
+                    <label class="checkbox-option">
+                      <input type="checkbox" id="opt-extra-cheese" value="5">
+                      <span class="checkbox-label" data-i18n="extra_cheese">جبنة غرويير إضافية (+5 ر.س)</span>
+                    </label>
+                    <label class="checkbox-option">
+                      <input type="checkbox" id="opt-gluten-free-bread" value="0">
+                      <span class="checkbox-label" data-i18n="gf_bread">استبدال بخبز خالٍ من الغلوتين (مجاني)</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- التحكم بالكمية والإضافة للسلة -->
+            <div class="modal-footer-action">
+              <div class="quantity-controller">
+                <button class="qty-btn" id="btn-qty-minus" aria-label="Decrease quantity">−</button>
+                <span class="qty-number" id="modal-qty-value">1</span>
+                <button class="qty-btn" id="btn-qty-plus" aria-label="Increase quantity">+</button>
+              </div>
+              <button class="btn btn-primary" id="btn-modal-add-to-cart" style="flex: 1; border-radius: 4px;">
+                <span data-i18n="add_to_cart_btn">أضف إلى الطلب</span>
+                <span class="modal-action-price" id="modal-total-action-price">0.00 ر.س</span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 4. سلة المشتريات الجانبية التفاعلية (CART DRAWER) -->
+    <!-- ========================================== -->
+    <div class="cart-drawer" id="cart-drawer-container">
+      <div class="cart-drawer-overlay" id="cart-drawer-overlay-bg"></div>
+      
+      <div class="cart-content-wrapper">
+        <div class="cart-header">
+          <h3 data-i18n="cart_title">سلة الطلبات</h3>
+          <button class="close-cart-btn" id="close-cart-btn" aria-label="Close cart">×</button>
+        </div>
+
+        <!-- حالة السلة فارغة -->
+        <div class="cart-empty-state" id="cart-empty-state-view">
+          <svg class="empty-cart-icon" viewBox="0 0 24 24">
+            <path d="M19 6h-2c0-2.76-2.24-5-5-5S7 3.24 7 6H5c-1.1 0-1.99.9-1.99 2L3 20c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-3c1.66 0 3 1.34 3 3H9c0-1.66 1.34-3 3-3zm0 10c-2.76 0-5-2.24-5-5h2c0 1.66 1.34 3 3 3s3-1.34 3-3h2c0 2.76-2.24 5-5 5z" fill="currentColor"/>
+          </svg>
+          <p data-i18n="cart_empty_text">سلة طلباتك فارغة حالياً.</p>
+          <p class="cart-empty-hint" data-i18n="cart_empty_hint">تصفح الأطباق اللذيذة وأضف بعض النكهات الفرنسية الرائعة لطاولتك.</p>
+        </div>
+
+        <!-- قائمة الأطباق المضافة للسلة -->
+        <div class="cart-items-scroll" id="cart-items-list-container">
+          <!-- سيتم إضافتها ديناميكياً -->
+        </div>
+
+        <!-- معلومات التوصيل ورقم الطاولة وتفاصيل الحساب -->
+        <div class="cart-footer" id="cart-footer-billing-section" style="display: none;">
+          
+          <!-- حقول مدخلات الزبون (رقم الطاولة والملاحظات) -->
+          <div class="cart-inputs">
+            <div class="cart-input-group">
+              <label for="cart-table-number" class="cart-label">
+                <span data-i18n="label_table">رقم الطاولة:</span> <span class="required">*</span>
+              </label>
+              <input type="number" id="cart-table-number" min="1" max="50" required placeholder="مثال: 5">
+              <span class="error-message" id="err-cart-table" style="display: none;" data-i18n="err_table_required">يرجى تحديد رقم طاولتك للخدمة.</span>
             </div>
             
-            <div class="menu-grid" id="menu-items-grid">
-                <!-- Dynamically Populated Menu Cards -->
+            <div class="cart-input-group">
+              <label for="cart-notes" class="cart-label" data-i18n="label_notes_kitchen">ملاحظات للمطبخ (اختياري):</label>
+              <textarea id="cart-notes" placeholder="مثال: بدون بصل، صلصة إضافية..."></textarea>
             </div>
-        </main>
-    </div>
+          </div>
 
-    <!-- 4. Dish Detail Modal -->
-    <div id="detail-modal" class="modal-overlay hidden">
-        <div class="modal-card modal-glass">
-            <button class="modal-close-btn" onclick="closeDetailModal()">&times;</button>
-            <div class="modal-img-container">
-                <img src="" id="modal-dish-img" alt="Dish Image">
-                <div class="dish-badge-overlay" id="modal-dish-badge"></div>
+          <!-- تفاصيل الفاتورة والحسابات -->
+          <div class="billing-details">
+            <div class="bill-row">
+              <span data-i18n="bill_subtotal">المجموع الفرعي:</span>
+              <span id="bill-subtotal-val">0.00 ر.س</span>
             </div>
-            <div class="modal-body">
-                <div class="modal-header-info">
-                    <h3 class="modal-dish-title" id="modal-dish-title">اسم الطبق الفاخر</h3>
-                    <div class="modal-dish-price" id="modal-dish-price">0.00 ر.س</div>
-                </div>
-                
-                <div class="dish-tags-list" id="modal-dish-tags">
-                    <!-- Tags -->
-                </div>
-
-                <div class="modal-section-title" data-tr="modal-description-title">وصف الطبق والمكونات</div>
-                <p class="modal-dish-desc" id="modal-dish-desc">تفاصيل المكونات الفاخرة للطبق وطريقة الطهي الخاصة.</p>
-                
-                <hr class="luxury-divider">
-
-                <!-- Customizable Options -->
-                <div class="modal-section-title" data-tr="modal-customize-title">خيارات الطهي والتخصيص</div>
-                
-                <!-- Customize Option 1: Cooking Level -->
-                <div class="custom-group" id="cooking-pref-group">
-                    <label class="custom-label" data-tr="customize-cooking">طريقة التحضير المفضلة</label>
-                    <div class="custom-options-grid">
-                        <label class="option-pill">
-                            <input type="radio" name="cooking-pref" value="grilled" checked>
-                            <span data-tr="pref-grilled">مشوي على الفحم</span>
-                        </label>
-                        <label class="option-pill">
-                            <input type="radio" name="cooking-pref" value="steamed">
-                            <span data-tr="pref-steamed">طهي على البخار</span>
-                        </label>
-                        <label class="option-pill">
-                            <input type="radio" name="cooking-pref" value="fried">
-                            <span data-tr="pref-fried">مقلي مقرمش</span>
-                        </label>
-                    </div>
-                </div>
-
-                <!-- Customize Option 2: Spice Level -->
-                <div class="custom-group">
-                    <label class="custom-label" data-tr="customize-spice">مستوى الفلفل / البهارات</label>
-                    <div class="custom-options-grid">
-                        <label class="option-pill">
-                            <input type="radio" name="spice-level" value="none" checked>
-                            <span data-tr="spice-none">بدون بهار حار</span>
-                        </label>
-                        <label class="option-pill">
-                            <input type="radio" name="spice-level" value="medium">
-                            <span data-tr="spice-medium">حرارة متوسطة 🌶️</span>
-                        </label>
-                        <label class="option-pill">
-                            <input type="radio" name="spice-level" value="high">
-                            <span data-tr="spice-high">حار جداً 🌶️🌶️</span>
-                        </label>
-                    </div>
-                </div>
-
-                <!-- Special Note Input -->
-                <div class="custom-group">
-                    <label class="custom-label" data-tr="special-note-label">ملاحظة خاصة للشيف</label>
-                    <input type="text" id="modal-dish-note" class="custom-input-text" data-tr-placeholder="note-placeholder" placeholder="مثال: بدون بصل، صوص خارجي...">
-                </div>
-
-                <div class="modal-footer-controls">
-                    <div class="quantity-controller">
-                        <button onclick="decrementModalQty()"><i class="fa-solid fa-minus"></i></button>
-                        <span id="modal-qty">1</span>
-                        <button onclick="incrementModalQty()"><i class="fa-solid fa-plus"></i></button>
-                    </div>
-                    <button class="btn-add-order-luxury" onclick="addCurrentItemToCart()">
-                        <span data-tr="add-to-order-btn">إضافة للطلب</span>
-                        <span class="btn-subtotal-price" id="modal-action-price">0.00 ر.س</span>
-                    </button>
-                </div>
+            <div class="bill-row">
+              <span data-i18n="bill_tax">ضريبة القيمة المضافة (15%):</span>
+              <span id="bill-tax-val">0.00 ر.س</span>
             </div>
+            <div class="bill-row total-row">
+              <span data-i18n="bill_total">الإجمالي النهائي:</span>
+              <span id="bill-total-val">0.00 ر.س</span>
+            </div>
+          </div>
+
+          <!-- زر تأكيد وإرسال الطلب عبر الواتساب -->
+          <button class="btn btn-primary" id="btn-submit-order" style="width: 100%; border-radius: 4px;">
+            <svg style="width: 1.2rem; height: 1.2rem; margin-inline-end: 0.5rem; fill: currentColor;" viewBox="0 0 24 24">
+              <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" fill="currentColor"/>
+            </svg>
+            <span data-i18n="btn_send_order">إرسال الطلب للمطبخ (WhatsApp)</span>
+          </button>
         </div>
+
+      </div>
     </div>
 
-    <!-- 5. Cart Sidebar -->
-    <div id="cart-sidebar" class="cart-overlay hidden">
-        <div class="cart-panel modal-glass">
-            <div class="cart-header">
-                <h3 class="cart-title">
-                    <i class="fa-solid fa-receipt gold-text"></i>
-                    <span data-tr="cart-title">تفاصيل طلبك الفاخر</span>
-                </h3>
-                <button class="cart-close-btn" onclick="toggleCart()">&times;</button>
-            </div>
-
-            <!-- Empty Cart State -->
-            <div class="cart-empty-state" id="cart-empty-view">
-                <i class="fa-solid fa-anchor wave-bounce-icon gold-text"></i>
-                <h4 data-tr="cart-empty-title">سلتك فارغة كأعماق البحار</h4>
-                <p data-tr="cart-empty-desc">تصفح قائمتنا البحرية الفاخرة وأضف بعض النكهات الساحرة لطلبك.</p>
-                <button class="btn-outline-gold" onclick="toggleCart()" data-tr="btn-browse">الرجوع للتصفح</button>
-            </div>
-
-            <!-- Cart Items View -->
-            <div class="cart-content-view hidden" id="cart-items-view">
-                <div class="cart-items-list" id="cart-items-container">
-                    <!-- Dynamic Cart Items -->
-                </div>
-
-                <!-- Custom Table Instruction -->
-                <div class="cart-kitchen-note-box">
-                    <label class="note-box-title" data-tr="kitchen-note-label"><i class="fa-solid fa-pen-nib gold-text"></i> تعليمات عامة للمطبخ</label>
-                    <textarea id="cart-general-note" data-tr-placeholder="kitchen-note-placeholder" placeholder="اكتب أي تعليمات عامة بخصوص الخدمة أو الطهي..."></textarea>
-                </div>
-
-                <!-- Financial Summary -->
-                <div class="cart-summary-box">
-                    <div class="summary-line">
-                        <span data-tr="subtotal">المجموع الفرعي</span>
-                        <span id="cart-subtotal">0.00 ر.س</span>
-                    </div>
-                    <div class="summary-line">
-                        <span data-tr="service-charge">رسوم خدمة فاخرة (10%)</span>
-                        <span id="cart-service-charge">0.00 ر.س</span>
-                    </div>
-                    <div class="summary-line">
-                        <span data-tr="vat">ضريبة القيمة المضافة (15%)</span>
-                        <span id="cart-vat">0.00 ر.س</span>
-                    </div>
-                    <div class="summary-divider"></div>
-                    <div class="summary-line total-line">
-                        <span data-tr="total">الإجمالي النهائي</span>
-                        <span class="gold-text" id="cart-total">0.00 ر.س</span>
-                    </div>
-                </div>
-
-                <!-- Action Button -->
-                <button class="btn-checkout-luxury" onclick="submitOrderToKitchen()">
-                    <i class="fa-solid fa-fire-burner"></i>
-                    <span data-tr="btn-submit-kitchen">إرسال الطلب للمطبخ الملكي</span>
-                </button>
-            </div>
+    <!-- ========================================== -->
+    <!-- 5. نافذة منبثقة لتأكيد إرسال الطلب أو استدعاء النادل -->
+    <!-- ========================================== -->
+    <div class="modal-overlay" id="notification-modal-overlay">
+      <div class="modal-card notification-card" id="notification-modal-card">
+        <!-- أيقونة جرس متحركة أو علامة نجاح -->
+        <div class="success-ring-animation">
+          <svg class="success-checkmark" viewBox="0 0 52 52">
+            <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+            <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+          </svg>
         </div>
+        <h3 class="modal-title" id="notification-modal-title">استدعاء النادل ناجح!</h3>
+        <p class="modal-desc" id="notification-modal-desc">تم التنبيه، سيأتي أحد أعضاء طاقمنا لخدمتك عند الطاولة في أقرب وقت.</p>
+        <button class="btn btn-primary" id="btn-close-notification" data-i18n="modal_close_btn">متابعة تصفح المنيو</button>
+      </div>
     </div>
 
-    <!-- 6. Waiter Call Dialog -->
-    <div id="waiter-modal" class="modal-overlay hidden">
-        <div class="modal-card small-modal modal-glass">
-            <button class="modal-close-btn" onclick="closeWaiterModal()">&times;</button>
-            <div class="waiter-modal-header text-center">
-                <div class="waiter-bell-wrapper">
-                    <i class="fa-solid fa-bell bell-shake gold-text"></i>
-                </div>
-                <h3 class="modal-title-gold" data-tr="waiter-modal-title">طلب خدمة الضيافة</h3>
-                <p class="waiter-desc" data-tr="waiter-modal-desc">طلبك مجاب في غضون لحظات، اختر الخدمة التي تحتاجها:</p>
+    <!-- ========================================== -->
+    <!-- 6. التذييل (FOOTER SECTION)                  -->
+    <!-- ========================================== -->
+    <footer class="footer" id="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          
+          <!-- عمود الشعار والقصة -->
+          <div class="footer-col">
+            <div class="logo">
+              <svg class="logo-icon" viewBox="0 0 100 100" style="width: 2.2rem; height: 2.2rem;">
+                <circle cx="50" cy="50" r="45" fill="none" stroke="var(--color-gold)" stroke-width="2"/>
+                <path d="M42 70 L48 35 Q50 30 52 35 L58 70 Z" fill="none" stroke="var(--color-gold)" stroke-width="2"/>
+                <circle cx="50" cy="27" r="3" fill="var(--color-gold)"/>
+              </svg>
+              <span>Le Bistrot Céleste</span>
             </div>
+            <p class="footer-desc" data-i18n="footer_about">مطعم باريسي راقٍ يدمج بين حداثة اليوم وتفاصيل عراقة الماضي الفرنسي لتذوق فنون الطهي والأطباق الحاصلة على جوائز الجودة الرفيعة.</p>
+            <div class="footer-socials">
+              <a href="#" class="social-link" aria-label="Instagram">
+                <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" fill="currentColor"/></svg>
+              </a>
+              <a href="#" class="social-link" aria-label="Facebook">
+                <svg viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z" fill="currentColor"/></svg>
+              </a>
+            </div>
+          </div>
 
-            <!-- Waiter Actions Grid -->
-            <div class="waiter-actions-grid" id="waiter-action-buttons">
-                <button class="waiter-action-card" onclick="triggerWaiterService('waiter')">
-                    <div class="action-icon"><i class="fa-solid fa-hand-holding-hand"></i></div>
-                    <div class="action-title" data-tr="action-waiter">طلب الويتر (النادل)</div>
-                    <div class="action-sub" data-tr="action-waiter-sub">مساعدتك في طاولة الطعام</div>
-                </button>
-                <button class="waiter-action-card" onclick="triggerWaiterService('bill')">
-                    <div class="action-icon"><i class="fa-solid fa-wallet"></i></div>
-                    <div class="action-title" data-tr="action-bill">طلب الفاتورة الدفع</div>
-                    <div class="action-sub" data-tr="action-bill-sub">سداد نقدي أو بطاقة</div>
-                </button>
-                <button class="waiter-action-card" onclick="triggerWaiterService('water')">
-                    <div class="action-icon"><i class="fa-solid fa-glass-water"></i></div>
-                    <div class="action-title" data-tr="action-water">ماء أو مناديل</div>
-                    <div class="action-sub" data-tr="action-water-sub">مستلزمات طاولة سريعة</div>
-                </button>
-            </div>
+          <!-- عمود أوقات العمل والخدمة -->
+          <div class="footer-col">
+            <h4 data-i18n="footer_col_hours">ساعات العمل والزيارة</h4>
+            <ul class="footer-links">
+              <li><span data-i18n="footer_weekdays">طيلة أيام الأسبوع:</span> <strong>12:00 م - 12:00 ص</strong></li>
+              <li><span data-i18n="footer_weekend">نهاية الأسبوع (الخميس والجمعة):</span> <strong>12:00 م - 01:30 ص</strong></li>
+              <li><span data-i18n="footer_brunch">وجبة فطور برانش (السبت):</span> <strong>08:30 ص - 12:00 م</strong></li>
+            </ul>
+          </div>
 
-            <!-- Waiter Status Tracker -->
-            <div class="waiter-status-box hidden" id="waiter-status-box">
-                <div class="tracking-loader">
-                    <div class="circle-pulse"></div>
-                    <i class="fa-solid fa-circle-notch fa-spin gold-text"></i>
+          <!-- عمود روابط الفئات السريعة -->
+          <div class="footer-col">
+            <h4 data-i18n="footer_col_categories">أصناف الطعام</h4>
+            <ul class="footer-links">
+              <li><a href="#menu-section" data-category-link="entrées" data-i18n="nav_entrées">المقبلات الفرنسية الدافئة</a></li>
+              <li><a href="#menu-section" data-category-link="plats" data-i18n="nav_plats">الأطباق الباريسية الرئيسية</a></li>
+              <li><a href="#menu-section" data-category-link="desserts" data-i18n="nav_desserts">الحلويات والجاتوه الفرنسي</a></li>
+              <li><a href="#menu-section" data-category-link="boissons" data-i18n="nav_boissons">القهوة الفرنسية والمشروبات</a></li>
+            </ul>
+          </div>
+
+          <!-- عمود تفاصيل الاتصال والموقع -->
+          <div class="footer-col">
+            <h4 data-i18n="footer_col_contact">الموقع والاتصال</h4>
+            <ul class="footer-contact-list">
+              <li class="footer-contact-item">
+                <svg class="footer-contact-icon" viewBox="0 0 24 24">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/>
+                </svg>
+                <div class="footer-contact-content" data-i18n="footer_loc_detail">
+                  شارع التحلية، حي الأندلس، جدة، المملكة العربية السعودية
                 </div>
-                <h4 class="gold-text" data-tr="waiter-notified">تم إبلاغ النادل بطاولتك</h4>
-                <p id="waiter-status-text" class="status-desc">جاري إرسال المضيف إلى الطاولة رقم 07...</p>
-                <button class="btn-cancel-service" onclick="cancelWaiterService()" data-tr="cancel-service-btn">إلغاء الطلب</button>
-            </div>
+              </li>
+              <li class="footer-contact-item">
+                <svg class="footer-contact-icon" viewBox="0 0 24 24">
+                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2z" fill="currentColor"/>
+                </svg>
+                <div class="footer-contact-content">
+                  bonjour@lebistrotceleste.com
+                </div>
+              </li>
+              <li class="footer-contact-item">
+                <svg class="footer-contact-icon" viewBox="0 0 24 24">
+                  <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5" fill="currentColor"/>
+                </svg>
+                <div class="footer-contact-content">
+                  +966 12 345 6789
+                </div>
+              </li>
+            </ul>
+          </div>
+
         </div>
-    </div>
 
-    <!-- 7. Order Tracker Modal (Kitchen Simulator) -->
-    <div id="tracker-modal" class="modal-overlay hidden">
-        <div class="modal-card tracker-modal-card modal-glass">
-            <button class="modal-close-btn" onclick="closeTrackerModal()">&times;</button>
-            
-            <div class="tracker-header text-center">
-                <div class="success-icon-wrapper">
-                    <i class="fa-solid fa-circle-check text-success"></i>
-                </div>
-                <h3 class="modal-title-gold" data-tr="order-placed-title">تم إرسال الطلب بنجاح!</h3>
-                <p class="tracker-desc"><span data-tr="order-no-label">رقم الطلب:</span> <strong class="gold-text" id="tracker-order-id">#LP-4829</strong></p>
-                <p class="tracker-desc"><span data-tr="order-table-label">الطاولة:</span> <strong class="gold-text" id="tracker-table-num">07</strong></p>
-            </div>
-
-            <!-- Visual Progress Tracker -->
-            <div class="kitchen-tracker-container">
-                
-                <!-- Step 1: Received -->
-                <div class="tracker-step active" id="step-1">
-                    <div class="step-icon-box">
-                        <i class="fa-solid fa-receipt"></i>
-                    </div>
-                    <div class="step-info">
-                        <h4 class="step-title" data-tr="step-received-title">استلام الطلب في المطبخ</h4>
-                        <p class="step-desc" data-tr="step-received-desc">تمت مراجعة طلبك وبدأ المطبخ الملكي في قراءته.</p>
-                    </div>
-                    <div class="step-status-badge text-success"><i class="fa-solid fa-circle-check"></i></div>
-                </div>
-
-                <!-- Step 2: Preparing -->
-                <div class="tracker-step" id="step-2">
-                    <div class="step-icon-box">
-                        <i class="fa-solid fa-fire-burner"></i>
-                    </div>
-                    <div class="step-info">
-                        <h4 class="step-title" data-tr="step-cooking-title">تحضير وطهي المأكولات</h4>
-                        <p class="step-desc" data-tr="step-cooking-desc">يقوم طهاة لؤلؤة المحيط بشوي الصيد الطازج وتجهيز النكهات.</p>
-                    </div>
-                    <div class="step-status-badge" id="step-2-badge"><i class="fa-solid fa-clock spinner-glow"></i></div>
-                </div>
-
-                <!-- Step 3: Plating -->
-                <div class="tracker-step" id="step-3">
-                    <div class="step-icon-box">
-                        <i class="fa-solid fa-plate-wheat"></i>
-                    </div>
-                    <div class="step-info">
-                        <h4 class="step-title" data-tr="step-plating-title">تزيين الطبق باللمسة الذهبية</h4>
-                        <p class="step-desc" data-tr="step-plating-desc">وضع اللمسات الفنية الأخيرة وإضافة بهارات الشيف التوقيعية.</p>
-                    </div>
-                    <div class="step-status-badge" id="step-3-badge"><i class="fa-solid fa-circle-dot"></i></div>
-                </div>
-
-                <!-- Step 4: Serving -->
-                <div class="tracker-step" id="step-4">
-                    <div class="step-icon-box">
-                        <i class="fa-solid fa-bell-concierge"></i>
-                    </div>
-                    <div class="step-info">
-                        <h4 class="step-title" data-tr="step-serving-title">في طريق التقديم لطاولتك</h4>
-                        <p class="step-desc" data-tr="step-serving-desc">مضيف الضيافة يتقدم بطلبك الساخن والشهي مباشرة لطاولتك.</p>
-                    </div>
-                    <div class="step-status-badge" id="step-4-badge"><i class="fa-solid fa-circle-dot"></i></div>
-                </div>
-            </div>
-
-            <!-- Footer Action -->
-            <div class="tracker-footer text-center">
-                <p class="tracker-est-time" data-tr="tracker-est-msg">الوقت المقدر للتقديم: <span class="gold-text" id="tracker-est-value">18-22 دقيقة</span></p>
-                <button class="btn-primary-luxury" onclick="closeTrackerModal()" data-tr="btn-continue-browsing">متابعة تصفح المنيو</button>
-            </div>
+        <div class="footer-bottom">
+          <div class="copyright">
+            &copy; 2026 <span data-i18n="footer_copy">Le Bistrot Céleste. جميع الحقوق محفوظة.</span>
+          </div>
+          <div class="footer-bottom-links">
+            <a href="#" data-i18n="link_terms">شروط الخدمة والاستخدام</a>
+            <a href="#" data-i18n="link_privacy">سياسة خصوصية المطاعم</a>
+          </div>
         </div>
-    </div>
 
-    <!-- Script File -->
-    <script src="app.js"></script>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="app.js"></script>
 </body>
 </html>
