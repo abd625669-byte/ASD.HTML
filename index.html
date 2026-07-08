@@ -1,686 +1,428 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luxury Kitchens | تصميم مطابخ فاخرة</title>
-    <!-- Google Fonts for Arabic, English, and Kurdish Support -->
+    <title>L'Océan Perle | لؤلؤة المحيط - منيو إلكتروني فاخر</title>
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
-    <style>
-        /* CSS RESET & BASE STYLES */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Cairo', 'Poppins', sans-serif;
-            background-color: #121212;
-            color: #e0e0e0;
-            overflow-x: hidden;
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        :root {
-            --bg-dark: #181818;
-            --bg-deep: #0f0f0f;
-            --accent-orange: #ff6b00;
-            --accent-gold: #ffcc00;
-            --text-light: #f5f5f5;
-            --text-muted: #aaaaaa;
-            --border-color: #2a2a2a;
-        }
-
-        /* 1. SPLASH SCREEN */
-        .splash-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: var(--bg-deep);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
-
-        .splash-content {
-            text-align: center;
-            padding: 20px;
-        }
-
-        .logo-container {
-            position: relative;
-            margin-bottom: 30px;
-        }
-
-        .brand-logo {
-            font-size: 32pt;
-            font-weight: 700;
-            letter-spacing: 2px;
-            color: var(--text-light);
-        }
-
-        .brand-logo span {
-            color: var(--accent-orange);
-            text-shadow: 0 0 15px rgba(255, 107, 0, 0.6);
-        }
-
-        .glow-effect {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 120px;
-            height: 120px;
-            background: radial-gradient(circle, rgba(255, 204, 0, 0.15) 0%, transparent 70%);
-            z-index: -1;
-        }
-
-        .splash-subtitle {
-            color: var(--text-muted);
-            margin-bottom: 40px;
-            font-size: 12pt;
-        }
-
-        .lang-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-        }
-
-        .btn-lang {
-            background-color: var(--bg-dark);
-            border: 1px solid var(--border-color);
-            color: var(--text-light);
-            padding: 12px 30px;
-            font-size: 11pt;
-            font-family: inherit;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-        }
-
-        .btn-lang:hover {
-            border-color: var(--accent-orange);
-            box-shadow: 0 0 10px rgba(255, 107, 0, 0.3);
-            color: var(--accent-orange);
-            transform: translateY(-2px);
-        }
-
-        /* 2. MAIN CONTENT & HEADER */
-        header {
-            background-color: rgba(24, 24, 24, 0.95);
-            border-bottom: 1px solid var(--border-color);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 100;
-        }
-
-        .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 18pt;
-            font-weight: 700;
-            color: var(--text-light);
-        }
-
-        .logo span {
-            color: var(--accent-orange);
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
-
-        nav ul li a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 11pt;
-            transition: color 0.3s ease;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent-gold);
-        }
-
-        .btn-consultation {
-            background: transparent;
-            border: 2px solid var(--accent-orange);
-            color: var(--text-light);
-            padding: 8px 20px;
-            cursor: pointer;
-            border-radius: 4px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .btn-consultation:hover {
-            background-color: var(--accent-orange);
-            box-shadow: 0 0 15px rgba(255, 107, 0, 0.4);
-        }
-
-        /* 3. HERO SECTION */
-        .hero-section {
-            position: relative;
-            height: 85vh;
-            margin-top: 70px;
-            background: #1a1a1a;
-            display: flex;
-            align-items: center;
-            padding: 0 5%;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 80% 20%, rgba(255, 204, 0, 0.05), transparent 50%),
-                        linear-gradient(to right, rgba(15, 15, 15, 0.95), rgba(15, 15, 15, 0.6));
-            z-index: 1;
-        }
-
-        .hero-container {
-            position: relative;
-            z-index: 2;
-            max-width: 700px;
-        }
-
-        .hero-section h2 {
-            font-size: 26pt;
-            font-weight: 700;
-            line-height: 1.4;
-            margin-bottom: 20px;
-            color: var(--text-light);
-        }
-
-        .hero-section p {
-            font-size: 12pt;
-            color: var(--text-muted);
-            margin-bottom: 35px;
-            line-height: 1.6;
-        }
-
-        .hero-actions {
-            display: flex;
-            gap: 15px;
-        }
-
-        .btn-primary {
-            background-color: var(--accent-orange);
-            border: none;
-            color: var(--text-light);
-            padding: 14px 35px;
-            font-size: 11pt;
-            font-weight: 600;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            background-color: #e05e00;
-            box-shadow: 0 0 20px rgba(255, 107, 0, 0.5);
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--text-light);
-            padding: 14px 35px;
-            font-size: 11pt;
-            text-decoration: none;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--text-muted);
-            background-color: rgba(255, 255, 255, 0.05);
-        }
-
-        /* 4. PORTFOLIO SECTION */
-        .portfolio-section {
-            max-width: 1200px;
-            margin: 80px auto;
-            padding: 0 20px;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .section-header h3 {
-            font-size: 20pt;
-            margin-bottom: 10px;
-        }
-
-        .accent-line {
-            width: 60px;
-            height: 3px;
-            background-color: var(--accent-orange);
-            margin: 0 auto;
-        }
-
-        .portfolio-grid {
-            display: flex;
-            gap: 20px;
-            width: 100%;
-        }
-
-        .portfolio-item {
-            flex: 1;
-            background-color: var(--bg-dark);
-            border-radius: 6px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-        }
-
-        .item-img-placeholder {
-            height: 240px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .kitchen-glow {
-            position: absolute;
-            bottom: -30px;
-            right: -30px;
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle, rgba(255, 204, 0, 0.1) 0%, transparent 70%);
-        }
-
-        .tag {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background-color: rgba(15, 15, 15, 0.8);
-            padding: 5px 12px;
-            font-size: 9pt;
-            border-radius: 4px;
-            border: 1px solid rgba(255, 107, 0, 0.4);
-        }
-
-        .item-info {
-            padding: 20px;
-        }
-
-        .item-info h4 {
-            font-size: 13pt;
-            margin-bottom: 8px;
-            color: var(--text-light);
-        }
-
-        .item-info p {
-            font-size: 10pt;
-            color: var(--text-muted);
-        }
-
-        /* 5. BOOKING SECTION */
-        .booking-section {
-            background-color: var(--bg-deep);
-            border-top: 1px solid var(--border-color);
-            padding: 80px 0;
-        }
-
-        .booking-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .booking-info, .booking-form-box {
-            flex: 1;
-        }
-
-        .booking-info h3 {
-            font-size: 22pt;
-            margin-bottom: 15px;
-            color: var(--text-light);
-        }
-
-        .booking-info p {
-            font-size: 11pt;
-            color: var(--text-muted);
-            line-height: 1.7;
-        }
-
-        .booking-form-box {
-            background-color: var(--bg-dark);
-            padding: 35px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 10pt;
-            color: var(--text-light);
-        }
-
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 12px;
-            background-color: var(--bg-deep);
-            border: 1px solid var(--border-color);
-            color: var(--text-light);
-            border-radius: 4px;
-            font-family: inherit;
-            font-size: 10pt;
-        }
-
-        .form-group input:focus, .form-group select:focus {
-            outline: none;
-            border-color: var(--accent-orange);
-        }
-
-        .btn-submit {
-            width: 100%;
-            background-color: var(--accent-orange);
-            color: var(--text-light);
-            border: none;
-            padding: 14px;
-            font-size: 11pt;
-            font-weight: 600;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn-submit:hover {
-            background-color: #e05e00;
-        }
-
-        footer {
-            text-align: center;
-            padding: 30px;
-            background-color: var(--bg-deep);
-            border-top: 1px solid var(--border-color);
-            font-size: 10pt;
-            color: var(--text-muted);
-        }
-
-        /* RTL & LTR Layout handling */
-        body.rtl { direction: rtl; }
-        body.ltr { direction: ltr; }
-        
-        body.rtl .header-container, body.rtl .booking-container { flex-direction: row; }
-        body.ltr .header-container, body.ltr .booking-container { flex-direction: row; }
-        
-        @media (max-width: 768px) {
-            .portfolio-grid, .booking-container { flex-direction: column !important; }
-            .header-container { flex-direction: column !important; gap: 15px; }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="dark-theme">
 
-    <!-- 1. Language Splash Screen -->
-    <div id="splash-screen" class="splash-screen">
-        <div class="splash-content">
-            <div class="logo-container">
-                <div class="glow-effect"></div>
-                <h1 class="brand-logo">KITCHEN<span>STUDIO</span></h1>
+    <!-- 1. Screen Loader -->
+    <div id="screen-loader" class="loader-container">
+        <div class="luxury-loader">
+            <div class="loader-ring"></div>
+            <div class="loader-logo">
+                <i class="fa-solid fa-anchor gold-text animate-pulse"></i>
             </div>
-            <p class="splash-subtitle">Select your language / اختر لغتك / زمانت ھەڵبژێرە</p>
-            <div class="lang-buttons">
-                <button onclick="selectLanguage('ar')" class="btn-lang">العربية</button>
-                <button onclick="selectLanguage('en')" class="btn-lang">English</button>
-                <button onclick="selectLanguage('ku')" class="btn-lang">كوردی</button>
+            <span class="loader-text gold-text" data-tr="loading">جاري تحميل التجربة الملكية...</span>
+        </div>
+    </div>
+
+    <!-- 2. Landing/Welcome Screen -->
+    <div id="welcome-screen" class="welcome-overlay">
+        <div class="welcome-bg" style="background-image: url('assets/hero_background.png');"></div>
+        <div class="welcome-content">
+            <div class="restaurant-logo-large">
+                <i class="fa-solid fa-anchor gold-text"></i>
+                <div class="logo-text">L'Océan Perle</div>
+                <div class="logo-subtext" data-tr="restaurant-sub">مطعم المأكولات البحرية الفاخر</div>
+            </div>
+            
+            <h1 class="welcome-title">
+                <span class="gold-text" data-tr="welcome-title-1">أهلاً بك في عالم</span><br>
+                <span class="pearl-text" data-tr="welcome-title-2">الفخامة البحرية</span>
+            </h1>
+            
+            <p class="welcome-desc" data-tr="welcome-desc-text">
+                حيث تلتقي عراقة المحيط باللمسات الذهبية الفاخرة لتجربة تذوق تفوق الخيال.
+            </p>
+
+            <div class="table-badge-large">
+                <span data-tr="table-prefix">طاولة</span>
+                <span id="welcome-table-num" class="gold-text">07</span>
+            </div>
+
+            <!-- Language Selection -->
+            <div class="lang-selector-landing">
+                <button class="btn-lang active" onclick="setLanguage('ar')">العربية</button>
+                <button class="btn-lang" onclick="setLanguage('en')">English</button>
+            </div>
+
+            <button class="btn-primary-luxury" id="btn-enter" onclick="enterMenu()">
+                <span data-tr="btn-enter-text">اكتشف القائمة الفاخرة</span>
+                <i class="fa-solid fa-chevron-left arrow-icon"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- 3. Main Application Dashboard -->
+    <div id="main-app" class="hidden">
+        <!-- Floating Action Button for Waiter Service -->
+        <button class="btn-waiter-float" onclick="openWaiterModal()">
+            <i class="fa-solid fa-bell"></i>
+            <span class="btn-waiter-text" data-tr="call-waiter-btn">طلب خدمة</span>
+        </button>
+
+        <!-- Elegant Header -->
+        <header class="app-header">
+            <div class="header-top">
+                <div class="logo-container" onclick="resetToHome()">
+                    <i class="fa-solid fa-anchor gold-text"></i>
+                    <div class="logo-details">
+                        <span class="logo-main">L'Océan Perle</span>
+                        <span class="logo-tag" data-tr="restaurant-tag">لؤلؤة المحيط</span>
+                    </div>
+                </div>
+                
+                <div class="header-actions">
+                    <!-- Language Selector -->
+                    <button class="icon-btn-luxury" id="lang-switch-btn" onclick="toggleLanguage()" title="Switch Language">
+                        <i class="fa-solid fa-globe"></i>
+                        <span class="btn-text">EN</span>
+                    </button>
+                    
+                    <!-- Table Badge -->
+                    <div class="header-table-badge">
+                        <span class="badge-lbl" data-tr="table">طاولة</span>
+                        <span class="badge-num" id="header-table-num">07</span>
+                    </div>
+
+                    <!-- Cart Toggle Button -->
+                    <button class="cart-btn-luxury" onclick="toggleCart()">
+                        <i class="fa-solid fa-receipt"></i>
+                        <span class="cart-badge hidden" id="cart-counter">0</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Search and Filter Bar -->
+            <div class="header-search-container">
+                <div class="search-bar">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" id="search-input" data-tr-placeholder="search-placeholder" placeholder="ابحث عن طبقك البحري المفضل..." oninput="filterMenuItems()">
+                </div>
+            </div>
+        </header>
+
+        <!-- Interactive Category Slider -->
+        <nav class="category-nav">
+            <div class="category-scroll-container" id="category-list">
+                <!-- Dynamically Populated by JS -->
+            </div>
+        </nav>
+
+        <!-- Dietary Filters Panel -->
+        <section class="dietary-filters">
+            <div class="filters-scroll">
+                <button class="filter-pill active" onclick="setDietaryFilter('all')" id="filter-all">
+                    <i class="fa-solid fa-utensils"></i>
+                    <span data-tr="filter-all">الكل</span>
+                </button>
+                <button class="filter-pill" onclick="setDietaryFilter('spicy')" id="filter-spicy">
+                    <i class="fa-solid fa-pepper-hot text-spicy"></i>
+                    <span data-tr="filter-spicy">حار</span>
+                </button>
+                <button class="filter-pill" onclick="setDietaryFilter('gluten-free')" id="filter-gluten">
+                    <i class="fa-solid fa-wheat-shear text-gluten"></i>
+                    <span data-tr="filter-gluten">خالي من الجلوتين</span>
+                </button>
+                <button class="filter-pill" onclick="setDietaryFilter('signature')" id="filter-signature">
+                    <i class="fa-solid fa-crown text-signature"></i>
+                    <span data-tr="filter-signature">أطباق توقيعية</span>
+                </button>
+                <button class="filter-pill" onclick="setDietaryFilter('nuts-free')" id="filter-nuts">
+                    <i class="fa-solid fa-seedling text-nuts"></i>
+                    <span data-tr="filter-nuts">خالي من المكسرات</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Menu Content Grid -->
+        <main class="menu-main-content">
+            <div class="section-title-container">
+                <h2 class="category-heading" id="current-category-name">روائع الشيف التوقيعية</h2>
+                <p class="category-subheading" id="current-category-desc">أطباق بحرية مبتكرة من إعداد شيف المطعم الحائز على جوائز عالمية.</p>
+            </div>
+            
+            <div class="menu-grid" id="menu-items-grid">
+                <!-- Dynamically Populated Menu Cards -->
+            </div>
+        </main>
+    </div>
+
+    <!-- 4. Dish Detail Modal -->
+    <div id="detail-modal" class="modal-overlay hidden">
+        <div class="modal-card modal-glass">
+            <button class="modal-close-btn" onclick="closeDetailModal()">&times;</button>
+            <div class="modal-img-container">
+                <img src="" id="modal-dish-img" alt="Dish Image">
+                <div class="dish-badge-overlay" id="modal-dish-badge"></div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-header-info">
+                    <h3 class="modal-dish-title" id="modal-dish-title">اسم الطبق الفاخر</h3>
+                    <div class="modal-dish-price" id="modal-dish-price">0.00 ر.س</div>
+                </div>
+                
+                <div class="dish-tags-list" id="modal-dish-tags">
+                    <!-- Tags -->
+                </div>
+
+                <div class="modal-section-title" data-tr="modal-description-title">وصف الطبق والمكونات</div>
+                <p class="modal-dish-desc" id="modal-dish-desc">تفاصيل المكونات الفاخرة للطبق وطريقة الطهي الخاصة.</p>
+                
+                <hr class="luxury-divider">
+
+                <!-- Customizable Options -->
+                <div class="modal-section-title" data-tr="modal-customize-title">خيارات الطهي والتخصيص</div>
+                
+                <!-- Customize Option 1: Cooking Level -->
+                <div class="custom-group" id="cooking-pref-group">
+                    <label class="custom-label" data-tr="customize-cooking">طريقة التحضير المفضلة</label>
+                    <div class="custom-options-grid">
+                        <label class="option-pill">
+                            <input type="radio" name="cooking-pref" value="grilled" checked>
+                            <span data-tr="pref-grilled">مشوي على الفحم</span>
+                        </label>
+                        <label class="option-pill">
+                            <input type="radio" name="cooking-pref" value="steamed">
+                            <span data-tr="pref-steamed">طهي على البخار</span>
+                        </label>
+                        <label class="option-pill">
+                            <input type="radio" name="cooking-pref" value="fried">
+                            <span data-tr="pref-fried">مقلي مقرمش</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Customize Option 2: Spice Level -->
+                <div class="custom-group">
+                    <label class="custom-label" data-tr="customize-spice">مستوى الفلفل / البهارات</label>
+                    <div class="custom-options-grid">
+                        <label class="option-pill">
+                            <input type="radio" name="spice-level" value="none" checked>
+                            <span data-tr="spice-none">بدون بهار حار</span>
+                        </label>
+                        <label class="option-pill">
+                            <input type="radio" name="spice-level" value="medium">
+                            <span data-tr="spice-medium">حرارة متوسطة 🌶️</span>
+                        </label>
+                        <label class="option-pill">
+                            <input type="radio" name="spice-level" value="high">
+                            <span data-tr="spice-high">حار جداً 🌶️🌶️</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Special Note Input -->
+                <div class="custom-group">
+                    <label class="custom-label" data-tr="special-note-label">ملاحظة خاصة للشيف</label>
+                    <input type="text" id="modal-dish-note" class="custom-input-text" data-tr-placeholder="note-placeholder" placeholder="مثال: بدون بصل، صوص خارجي...">
+                </div>
+
+                <div class="modal-footer-controls">
+                    <div class="quantity-controller">
+                        <button onclick="decrementModalQty()"><i class="fa-solid fa-minus"></i></button>
+                        <span id="modal-qty">1</span>
+                        <button onclick="incrementModalQty()"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                    <button class="btn-add-order-luxury" onclick="addCurrentItemToCart()">
+                        <span data-tr="add-to-order-btn">إضافة للطلب</span>
+                        <span class="btn-subtotal-price" id="modal-action-price">0.00 ر.س</span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- 2. Main Website Container (Hidden initially) -->
-    <div id="main-content" class="main-content hidden">
-        
-        <!-- Header / Navigation Bar -->
-        <header>
-            <div class="header-container">
-                <div class="logo">KITCHEN<span>STUDIO</span></div>
-                <nav>
-                    <ul id="nav-links"></ul>
-                </nav>
-                <button class="btn-consultation" id="btn-consult-nav" onclick="scrollToBooking()">طلب استشارة</button>
+    <!-- 5. Cart Sidebar -->
+    <div id="cart-sidebar" class="cart-overlay hidden">
+        <div class="cart-panel modal-glass">
+            <div class="cart-header">
+                <h3 class="cart-title">
+                    <i class="fa-solid fa-receipt gold-text"></i>
+                    <span data-tr="cart-title">تفاصيل طلبك الفاخر</span>
+                </h3>
+                <button class="cart-close-btn" onclick="toggleCart()">&times;</button>
             </div>
-        </header>
 
-        <!-- Hero Section -->
-        <section class="hero-section">
-            <div class="hero-overlay"></div>
-            <div class="hero-container">
-                <h2 id="hero-title">نصنع من مطبخك لوحة فنية تجمع الفخامة والرفاهية</h2>
-                <p id="hero-desc">تصاميم مطابخ مودرن وكلاسيك ميكانيكية متطورة ومصنعة بأجود الخامات العالمية مع ضمان حقيقي.</p>
-                <div class="hero-actions">
-                    <button class="btn-primary" onclick="scrollToBooking()" id="hero-cta">ابدأ تصميم مطبخك الآن</button>
-                    <a href="#portfolio" class="btn-secondary" id="hero-secondary">مشاهدة أعمالنا</a>
-                </div>
+            <!-- Empty Cart State -->
+            <div class="cart-empty-state" id="cart-empty-view">
+                <i class="fa-solid fa-anchor wave-bounce-icon gold-text"></i>
+                <h4 data-tr="cart-empty-title">سلتك فارغة كأعماق البحار</h4>
+                <p data-tr="cart-empty-desc">تصفح قائمتنا البحرية الفاخرة وأضف بعض النكهات الساحرة لطلبك.</p>
+                <button class="btn-outline-gold" onclick="toggleCart()" data-tr="btn-browse">الرجوع للتصفح</button>
             </div>
-        </section>
 
-        <!-- Portfolio Section -->
-        <section id="portfolio" class="portfolio-section">
-            <div class="section-header">
-                <h3 id="portfolio-title">أحدث مشاريعنا</h3>
-                <div class="accent-line"></div>
+            <!-- Cart Items View -->
+            <div class="cart-content-view hidden" id="cart-items-view">
+                <div class="cart-items-list" id="cart-items-container">
+                    <!-- Dynamic Cart Items -->
+                </div>
+
+                <!-- Custom Table Instruction -->
+                <div class="cart-kitchen-note-box">
+                    <label class="note-box-title" data-tr="kitchen-note-label"><i class="fa-solid fa-pen-nib gold-text"></i> تعليمات عامة للمطبخ</label>
+                    <textarea id="cart-general-note" data-tr-placeholder="kitchen-note-placeholder" placeholder="اكتب أي تعليمات عامة بخصوص الخدمة أو الطهي..."></textarea>
+                </div>
+
+                <!-- Financial Summary -->
+                <div class="cart-summary-box">
+                    <div class="summary-line">
+                        <span data-tr="subtotal">المجموع الفرعي</span>
+                        <span id="cart-subtotal">0.00 ر.س</span>
+                    </div>
+                    <div class="summary-line">
+                        <span data-tr="service-charge">رسوم خدمة فاخرة (10%)</span>
+                        <span id="cart-service-charge">0.00 ر.س</span>
+                    </div>
+                    <div class="summary-line">
+                        <span data-tr="vat">ضريبة القيمة المضافة (15%)</span>
+                        <span id="cart-vat">0.00 ر.س</span>
+                    </div>
+                    <div class="summary-divider"></div>
+                    <div class="summary-line total-line">
+                        <span data-tr="total">الإجمالي النهائي</span>
+                        <span class="gold-text" id="cart-total">0.00 ر.س</span>
+                    </div>
+                </div>
+
+                <!-- Action Button -->
+                <button class="btn-checkout-luxury" onclick="submitOrderToKitchen()">
+                    <i class="fa-solid fa-fire-burner"></i>
+                    <span data-tr="btn-submit-kitchen">إرسال الطلب للمطبخ الملكي</span>
+                </button>
             </div>
-            <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <div class="item-img-placeholder" style="background: linear-gradient(135deg, #2a2a2a, #1a1a1a);">
-                        <div class="kitchen-glow"></div>
-                        <span class="tag">Modern Black</span>
-                    </div>
-                    <div class="item-info">
-                        <h4 id="p1-title">مطبخ مودرن أسود مطفأ</h4>
-                        <p id="p1-desc">إضاءة ليد مخفية - خامات أكريليك مقاومة للرطوبة</p>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="item-img-placeholder" style="background: linear-gradient(135deg, #222, #111);">
-                        <div class="kitchen-glow"></div>
-                        <span class="tag">Classic Oak</span>
-                    </div>
-                    <div class="item-info">
-                        <h4 id="p2-title">مطبخ كلاسيك خشب بلوط</h4>
-                        <p id="p2-desc">لمسات ذهبية فاخرة مع رخام طبيعي كوارتز</p>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="item-img-placeholder" style="background: linear-gradient(135deg, #2d2d2d, #1f1f1f);">
-                        <div class="kitchen-glow"></div>
-                        <span class="tag">Minimalist Gray</span>
-                    </div>
-                    <div class="item-info">
-                        <h4 id="p3-title">مطبخ رمادي فحمي ذكي</h4>
-                        <p id="p3-desc">أنظمة هيدروليكية بالكامل واستغلال ذكي للمساحات</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Booking / Consultation Section -->
-        <section id="booking" class="booking-section">
-            <div class="booking-container">
-                <div class="booking-info">
-                    <h3 id="booking-title">احجز استشارتك المجانية</h3>
-                    <p id="booking-desc">املأ الاستمارة وسيقوم مهندسونا بالتواصل معك لزيارة الموقع وأخذ القياسات مجاناً وتزويدك بتصميم 3D مبدئي.</p>
-                </div>
-                <div class="booking-form-box">
-                    <form id="consultation-form" onsubmit="handleFormSubmit(event)">
-                        <div class="form-group">
-                            <label for="name" id="lbl-name">الاسم الكامل</label>
-                            <input type="text" id="name" required placeholder="...">
-                        </div>
-                        <div class="form-group">
-                            <label for="phone" id="lbl-phone">رقم الهاتف</label>
-                            <input type="tel" id="phone" required placeholder="07XXXXXXXX">
-                        </div>
-                        <div class="form-group">
-                            <label for="style" id="lbl-style">الستايل المفضل</label>
-                            <select id="style">
-                                <option value="modern">Modern / مودرن</option>
-                                <option value="classic">Classic / كلاسيك</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn-submit" id="btn-submit-text">حجز الموعد</button>
-                    </form>
-                </div>
-            </div>
-        </section>
-
-        <footer>
-            <p>&copy; 2026 KITCHENSTUDIO. All Rights Reserved.</p>
-        </footer>
-
+        </div>
     </div>
 
-    <script>
-        const translations = {
-            ar: {
-                dir: 'rtl',
-                nav: ['الرئيسية', 'مشاريعنا', 'اتصل بنا'],
-                btnConsultNav: 'طلب استشارة',
-                heroTitle: 'نصنع من مطبخك لوحة فنية تجمع الفخامة والرفاهية',
-                heroDesc: 'تصاميم مطابخ مودرن وكلاسيك ميكانيكية متطورة ومصنعة بأجود الخامات العالمية مع ضمان حقيقي.',
-                heroCta: 'ابدأ تصميم مطبخك الآن',
-                heroSecondary: 'مشاهدة أعمالنا',
-                portfolioTitle: 'أحدث مشاريعنا',
-                bookingTitle: 'احجز استشارتك المجانية',
-                bookingDesc: 'املأ الاستمارة وسيقوم مهندسونا بالتواصل معك لزيارة الموقع وأخذ القياسات مجاناً.',
-                lblName: 'الاسم الكامل',
-                lblPhone: 'رقم الهاتف',
-                lblStyle: 'الستايل المفضل',
-                btnSubmit: 'إرسال الطلب وحجز موعد',
-                successMsg: 'شكراً لتواصلك معنا! سيقوم مهندسونا بالاتصال بك قريباً.',
-                p1T: 'مطبخ مودرن أسود مطفأ', p1D: 'إضاءة ليد مخفية وخامات أكريليك فاخرة',
-                p2T: 'مطبخ كلاسيك خشب بلوط', p2D: 'لمسات ذهبية فاخرة مع رخام طبيعي',
-                p3T: 'مطبخ رمادي فحمي ذكي', p3D: 'أنظمة هيدروليكية بالكامل واستغلال ذكي'
-            },
-            en: {
-                dir: 'ltr',
-                nav: ['Home', 'Projects', 'Contact Us'],
-                btnConsultNav: 'Request Consultation',
-                heroTitle: 'We craft your kitchen into a masterpiece of luxury',
-                heroDesc: 'Advanced modern and classic mechanical kitchen designs, made with the finest global materials.',
-                heroCta: 'Start Your Design Now',
-                heroSecondary: 'View Our Work',
-                portfolioTitle: 'Our Latest Projects',
-                bookingTitle: 'Book Your Free Consultation',
-                bookingDesc: 'Fill out the form and our engineers will contact you to take measurements for free.',
-                lblName: 'Full Name',
-                lblPhone: 'Phone Number',
-                lblStyle: 'Preferred Style',
-                btnSubmit: 'Submit Request',
-                successMsg: 'Thank you! Our engineers will call you soon.',
-                p1T: 'Modern Matte Black', p1D: 'Hidden LED lighting & luxury acrylic surfaces',
-                p2T: 'Classic Royal Oak', p2D: 'Elegant gold touches with premium marble',
-                p3T: 'Smart Charcoal Gray', p3D: 'Fully hydraulic systems with smart spacing'
-            },
-            ku: {
-                dir: 'rtl',
-                nav: ['سەرەکی', 'پڕۆژەکانمان', 'پەیوەندی'],
-                btnConsultNav: 'داواکردنی ڕاوێژکاری',
-                heroTitle: 'چێشتخانەکەت دەکەینە شاکارێکی ناوازە لە مۆدێرن و فخامەت',
-                heroDesc: 'دیزاینی پێشکەوتووی چێشتخانەی مۆدێرن و کلاسیک بە باشترین کەرەستەی جیهانی.',
-                heroCta: 'ئێستا دەست بە دیزاین بکە',
-                heroSecondary: 'بینینی کارەکانمان',
-                portfolioTitle: 'نوێترین پڕۆژەکانمان',
-                bookingTitle: 'ڕاوێژکاری بێبەرامبەر بگرە',
-                bookingDesc: 'فۆرمەکە پڕبکەرەوە و ئەندازیارانمان پەیوەندیت پێوە دەکەن بۆ گرتنی پێوانەکان بەخۆڕایی.',
-                lblName: 'ناوی تەواو',
-                lblPhone: 'ژمارەی مۆبایل',
-                lblStyle: 'ستایلی دڵخواز',
-                btnSubmit: 'ناردنی داواکاری',
-                successMsg: 'سپاس بۆ پەیوەندیکردنتان! ئەندازیارانمان بەم زووانە پەیوەندیتان پێوە دەکەن.',
-                p1T: 'چێشتخانەی ڕەشی مۆدێرن', p1D: 'ڕووناکی لیدی شاراوە و ڕووی ئەکادیمی شاهانە',
-                p2T: 'دار بەڕووی کلاسیک', p2D: 'دەستکاری ئاڵتونی نایاب لەگەڵ مڕمڕی سروشتی',
-                p3T: 'خۆڵەمێشی زیرەک', p3D: 'سیستمی هایدرۆلیکی تەواو لەگەڵ بەکارهێنانی زیرەکی بۆشایی'
-            }
-        };
+    <!-- 6. Waiter Call Dialog -->
+    <div id="waiter-modal" class="modal-overlay hidden">
+        <div class="modal-card small-modal modal-glass">
+            <button class="modal-close-btn" onclick="closeWaiterModal()">&times;</button>
+            <div class="waiter-modal-header text-center">
+                <div class="waiter-bell-wrapper">
+                    <i class="fa-solid fa-bell bell-shake gold-text"></i>
+                </div>
+                <h3 class="modal-title-gold" data-tr="waiter-modal-title">طلب خدمة الضيافة</h3>
+                <p class="waiter-desc" data-tr="waiter-modal-desc">طلبك مجاب في غضون لحظات، اختر الخدمة التي تحتاجها:</p>
+            </div>
 
-        function selectLanguage(lang) {
-            const data = translations[lang];
+            <!-- Waiter Actions Grid -->
+            <div class="waiter-actions-grid" id="waiter-action-buttons">
+                <button class="waiter-action-card" onclick="triggerWaiterService('waiter')">
+                    <div class="action-icon"><i class="fa-solid fa-hand-holding-hand"></i></div>
+                    <div class="action-title" data-tr="action-waiter">طلب الويتر (النادل)</div>
+                    <div class="action-sub" data-tr="action-waiter-sub">مساعدتك في طاولة الطعام</div>
+                </button>
+                <button class="waiter-action-card" onclick="triggerWaiterService('bill')">
+                    <div class="action-icon"><i class="fa-solid fa-wallet"></i></div>
+                    <div class="action-title" data-tr="action-bill">طلب الفاتورة الدفع</div>
+                    <div class="action-sub" data-tr="action-bill-sub">سداد نقدي أو بطاقة</div>
+                </button>
+                <button class="waiter-action-card" onclick="triggerWaiterService('water')">
+                    <div class="action-icon"><i class="fa-solid fa-glass-water"></i></div>
+                    <div class="action-title" data-tr="action-water">ماء أو مناديل</div>
+                    <div class="action-sub" data-tr="action-water-sub">مستلزمات طاولة سريعة</div>
+                </button>
+            </div>
+
+            <!-- Waiter Status Tracker -->
+            <div class="waiter-status-box hidden" id="waiter-status-box">
+                <div class="tracking-loader">
+                    <div class="circle-pulse"></div>
+                    <i class="fa-solid fa-circle-notch fa-spin gold-text"></i>
+                </div>
+                <h4 class="gold-text" data-tr="waiter-notified">تم إبلاغ النادل بطاولتك</h4>
+                <p id="waiter-status-text" class="status-desc">جاري إرسال المضيف إلى الطاولة رقم 07...</p>
+                <button class="btn-cancel-service" onclick="cancelWaiterService()" data-tr="cancel-service-btn">إلغاء الطلب</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 7. Order Tracker Modal (Kitchen Simulator) -->
+    <div id="tracker-modal" class="modal-overlay hidden">
+        <div class="modal-card tracker-modal-card modal-glass">
+            <button class="modal-close-btn" onclick="closeTrackerModal()">&times;</button>
             
-            // Set direction on body and main wrapper
-            document.body.className = data.dir;
-            document.getElementById('main-content').className = `main-content ${data.dir}`;
-            
-            // Update Text Content
-            document.getElementById('btn-consult-nav').innerText = data.btnConsultNav;
-            document.getElementById('hero-title').innerText = data.heroTitle;
-            document.getElementById('hero-desc').innerText = data.heroDesc;
-            document.getElementById('hero-cta').innerText = data.heroCta;
-            document.getElementById('hero-secondary').innerText = data.heroSecondary;
-            document.getElementById('portfolio-title').innerText = data.portfolioTitle;
-            document.getElementById('booking-title').innerText = data.bookingTitle;
-            document.getElementById('booking-desc').innerText = data.bookingDesc;
-            
-            document.getElementById('lbl-name').innerText = data.lblName;
-            document.getElementById('lbl-phone').innerText = data.lblPhone;
-            document.getElementById('lbl-style').innerText = data.lblStyle;
-            document.getElementById('btn-submit-text').innerText = data.btnSubmit;
+            <div class="tracker-header text-center">
+                <div class="success-icon-wrapper">
+                    <i class="fa-solid fa-circle-check text-success"></i>
+                </div>
+                <h3 class="modal-title-gold" data-tr="order-placed-title">تم إرسال الطلب بنجاح!</h3>
+                <p class="tracker-desc"><span data-tr="order-no-label">رقم الطلب:</span> <strong class="gold-text" id="tracker-order-id">#LP-4829</strong></p>
+                <p class="tracker-desc"><span data-tr="order-table-label">الطاولة:</span> <strong class="gold-text" id="tracker-table-num">07</strong></p>
+            </div>
 
-            document.getElementById('p1-title').innerText = data.p1T; document.getElementById('p1-desc').innerText = data.p1D;
-            document.getElementById('p2-title').innerText = data.p2T; document.getElementById('p2-desc').innerText = data.p2D;
-            document.getElementById('p3-title').innerText = data.p3T; document.getElementById('p3-desc').innerText = data.p3D;
-            
-            // Rebuild Navigation
-            const navUl = document.getElementById('nav-links');
-            navUl.innerHTML = '';
-            const sections = ['#main-content', '#portfolio', '#booking'];
-            data.nav.forEach((item, index) => {
-                const li = document.createElement('li');
-                li.innerHTML = `<a href="${sections[index]}">${item}</a>`;
-                navUl.appendChild(li);
-            });
+            <!-- Visual Progress Tracker -->
+            <div class="kitchen-tracker-container">
+                
+                <!-- Step 1: Received -->
+                <div class="tracker-step active" id="step-1">
+                    <div class="step-icon-box">
+                        <i class="fa-solid fa-receipt"></i>
+                    </div>
+                    <div class="step-info">
+                        <h4 class="step-title" data-tr="step-received-title">استلام الطلب في المطبخ</h4>
+                        <p class="step-desc" data-tr="step-received-desc">تمت مراجعة طلبك وبدأ المطبخ الملكي في قراءته.</p>
+                    </div>
+                    <div class="step-status-badge text-success"><i class="fa-solid fa-circle-check"></i></div>
+                </div>
 
-            // Switch Screen visibility
-            document.getElementById('splash-screen').classList.add('hidden');
-            document.getElementById('main-content').classList.remove('hidden');
-        }
+                <!-- Step 2: Preparing -->
+                <div class="tracker-step" id="step-2">
+                    <div class="step-icon-box">
+                        <i class="fa-solid fa-fire-burner"></i>
+                    </div>
+                    <div class="step-info">
+                        <h4 class="step-title" data-tr="step-cooking-title">تحضير وطهي المأكولات</h4>
+                        <p class="step-desc" data-tr="step-cooking-desc">يقوم طهاة لؤلؤة المحيط بشوي الصيد الطازج وتجهيز النكهات.</p>
+                    </div>
+                    <div class="step-status-badge" id="step-2-badge"><i class="fa-solid fa-clock spinner-glow"></i></div>
+                </div>
 
-        function scrollToBooking() {
-            document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
-        }
+                <!-- Step 3: Plating -->
+                <div class="tracker-step" id="step-3">
+                    <div class="step-icon-box">
+                        <i class="fa-solid fa-plate-wheat"></i>
+                    </div>
+                    <div class="step-info">
+                        <h4 class="step-title" data-tr="step-plating-title">تزيين الطبق باللمسة الذهبية</h4>
+                        <p class="step-desc" data-tr="step-plating-desc">وضع اللمسات الفنية الأخيرة وإضافة بهارات الشيف التوقيعية.</p>
+                    </div>
+                    <div class="step-status-badge" id="step-3-badge"><i class="fa-solid fa-circle-dot"></i></div>
+                </div>
 
-        function handleFormSubmit(event) {
-            event.preventDefault();
-            alert("تم إرسال طلبك بنجاح!");
-            document.getElementById('consultation-form').reset();
-        }
-    </script>
+                <!-- Step 4: Serving -->
+                <div class="tracker-step" id="step-4">
+                    <div class="step-icon-box">
+                        <i class="fa-solid fa-bell-concierge"></i>
+                    </div>
+                    <div class="step-info">
+                        <h4 class="step-title" data-tr="step-serving-title">في طريق التقديم لطاولتك</h4>
+                        <p class="step-desc" data-tr="step-serving-desc">مضيف الضيافة يتقدم بطلبك الساخن والشهي مباشرة لطاولتك.</p>
+                    </div>
+                    <div class="step-status-badge" id="step-4-badge"><i class="fa-solid fa-circle-dot"></i></div>
+                </div>
+            </div>
+
+            <!-- Footer Action -->
+            <div class="tracker-footer text-center">
+                <p class="tracker-est-time" data-tr="tracker-est-msg">الوقت المقدر للتقديم: <span class="gold-text" id="tracker-est-value">18-22 دقيقة</span></p>
+                <button class="btn-primary-luxury" onclick="closeTrackerModal()" data-tr="btn-continue-browsing">متابعة تصفح المنيو</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script File -->
+    <script src="app.js"></script>
 </body>
 </html>
